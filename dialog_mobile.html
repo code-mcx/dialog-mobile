@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>dialog移动端对话框</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="css/dialog.mobile.css"/>
+		<script type="text/javascript" src="js/dialog.mobile.min.js"></script>
+		<style>
+			body{
+				font-family: "microsoft yahei";
+			}
+			button{
+				border: none;
+				background-color: #E2E2E2;
+				padding: 6px 12px;
+				border: 1px solid #CCCCCC;
+				border-radius: 3px;
+				outline: none;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<h5>alert</h5>
+		<p>
+			<button id="button-alert">alert</button>
+		</p>
+		
+		<h5>confirm</h5>
+		<p>
+			<button id="button-confirm">默认行为的confirm</button><br/><br/>
+			<button id="button-confirm-click">确定按钮点击回调的confirm</button><br/><br/>
+			<button id="button-confirm-text">自定义确定按钮文字的confirm</button>
+		</p>
+		
+		<h5>bottom dialog</h5>
+		<p>
+			<button id="button-b-dialog">默认行为的bottom dialog</button><br/><br/>
+			<button id="button-b-dialog-btn">自定义按钮的bottom dialog</button><br/><br/>
+			<button id="button-b-dialog-style">自定义按钮文字颜色的bottom dialog</button><br/><br/>
+			<button id="button-b-dialog-click">按钮点击回调的bottom dialog</button>
+		</p>
+		
+		<h5>toast</h5>
+		<p>
+			<button id="button-toast">默认行为的toast</button><br/><br/>
+			<button id="button-toast-time">指定消失时间的toast</button>
+		</p>
+		
+		<h5>loading</h5>
+		<p>
+			<button id="button-loading">默认行为的loading</button><br/><br/>
+			<button id="button-loading-content">指定内容的loading</button><br/><br/>
+			<button id="button-loading-close">3秒后关闭的loading</button>
+		</p>
+		
+	</body>
+	<script type="text/javascript">
+	
+		//alert
+		document.getElementById("button-alert").onclick = function(){
+			dialog.alert("我是内容我是内容我是内容");
+		};
+		
+		//confirm
+		
+		//可设置参数
+		//sureBtnText: "确定",  //确认按钮文字
+		//确认按钮点击回调
+		//sureBtnClick: function(){} 
+		document.getElementById("button-confirm").onclick = function(){
+			dialog.confirm("我是内容我是内容我是内容");
+		};
+		document.getElementById("button-confirm-click").onclick = function(){
+			dialog.confirm("点击确定试一下", {
+				//确认按钮点击回调
+				sureBtnClick: function(){
+					alert("你点击了确定");
+				}
+			});
+		};
+		document.getElementById("button-confirm-text").onclick = function(){
+			dialog.confirm("这么晚还不睡，你想成仙吗？", {
+				sureBtnText: "是的",  //确认按钮文字
+				sureBtnClick: function(){  //确认按钮点击回调
+					alert("你已成仙...");
+				}
+			});
+		};
+		
+		//bottom dialog
+		
+		//可设置参数
+		//btn: ["打开相机", "打开图库"],  //按钮文字
+		//btnColor: ["#333333", "#333333"],  //按钮文字颜色
+		//按钮点击回调函数，index从1开始。注意取消按钮不回调此函数
+		//btnClick: function(index){}  
+		document.getElementById("button-b-dialog").onclick = function(){
+			dialog.showBottom();
+		};
+		document.getElementById("button-b-dialog-btn").onclick = function(){
+			dialog.showBottom({
+				btn: ["打开相机", "打开图库"]  //设置按钮文字
+			});
+		};
+		document.getElementById("button-b-dialog-style").onclick = function(){
+			dialog.showBottom({
+				btn: ["打开相机", "打开图库"],  //设置按钮文字
+				btnColor: ["#000000", "#000000"]  //设置按钮文字颜色
+			});
+		};
+		document.getElementById("button-b-dialog-click").onclick = function(){
+			var btn = ["打开相机", "打开图库"];
+			dialog.showBottom({
+				btn: btn,  //设置按钮文字
+				btnColor: ["#000000", "#000000"],  //设置按钮文字颜色
+				//按钮点击回调函数，index从1开始。注意取消按钮不回调此函数
+				btnClick: function(index){
+					alert("你点击了" + btn[index - 1]);
+				}
+			});
+		};
+		
+		//toast
+		document.getElementById("button-toast").onclick = function(){
+			dialog.toast("我是toast");
+		};
+		document.getElementById("button-toast-time").onclick = function(){
+			dialog.toast("我是指定消失时间的toast", 2);  //2秒后消失
+		};
+		
+		//loading
+		
+		//可设置参数
+		//src: "img",  //loading图所在路径 默认为img。表示该页面和img为同一级
+		//hint: "加载中..."  //指定提示内容
+		document.getElementById("button-loading").onclick = function(){
+			dialog.loading();
+		};
+		document.getElementById("button-loading-content").onclick = function(){
+			dialog.loading({
+				hint: "加载中..."  //指定提示内容
+			});
+		};
+		document.getElementById("button-loading-close").onclick = function(){
+			dialog.loading({
+				hint: "加载中..."  //指定提示内容
+			});
+			setTimeout(function(){
+				dialog.closeLoading();  //关闭所有loading层
+			}, 3000);
+		};
+	</script>
+</html>
