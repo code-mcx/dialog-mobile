@@ -68,7 +68,7 @@
 .bottom-btn-item .dialog-item-btn{
 	font-size: 17px;
 	background: #F8F8FF;
-	padding: 0.8em 0;
+	padding: 0.5em 0;
 	border-bottom: 1px solid #D6D6D6;
 }
 .bottom-btn-item .dialog-item-btn:first-child{
@@ -87,7 +87,7 @@
 	text-align: center;
 	background: #F8F8FF;
 	border-radius: 3px;
-	padding: 0.8em 0;
+	padding: 0.5em 0;
 }
 /*toast*/
 .mobile-toast{
