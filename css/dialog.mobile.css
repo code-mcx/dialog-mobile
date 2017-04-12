@@ -22,12 +22,25 @@
 	text-align: center;
 	color: #333333;
 	border-radius: 5px 5px 0 0;
+	position: relative;
+}
+.mobile-dialog .dialog-content:after
+{
+	content: "";
+	position: absolute;
+	z-index: 10002;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-color: #CCCCCC;
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
 }
 .mobile-dialog .dialog-button{
 	height: 3em;
 	line-height: 3em;
 	text-align: center;
-	border-top: 1px solid #D6D6D6;
 	border-radius: 0 0 5px 5px;
 	color: #000000;
 	background: #EEEEEE;
@@ -39,14 +52,23 @@
 	width: 50%;
 	line-height: 3em;
 	text-align: center;
-	border-top: 1px solid #D6D6D6;
 	background: #EEEEEE;
 }
 .mobile-dialog .dialog-sure-button{
-	margin-left: -1px;
-	border-left: 1px solid #D6D6D6;
 	color: #1C86EE;
 	border-radius: 0 0 5px 0;
+	position: relative;
+}
+.mobile-dialog .dialog-sure-button:after{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1px;
+	height: 100%;
+	background-color: #CCCCCC;
+	-webkit-transform: scaleX(.5);
+	transform: scaleX(.5);
 }
 .mobile-dialog .dialog-cancel-button{
 	color: #000000;
@@ -67,7 +89,7 @@
 }
 .bottom-btn-item .dialog-item-btn{
 	font-size: 17px;
-	background: #F8F8FF;
+	background: #FFFFFF;
 	padding: 0.5em 0;
 	border-bottom: 1px solid #D6D6D6;
 }
@@ -85,7 +107,7 @@
 	font-size: 17px;
 	margin: 0.8em 0;
 	text-align: center;
-	background: #F8F8FF;
+	background: #FFFFFF;
 	border-radius: 3px;
 	padding: 0.5em 0;
 }
