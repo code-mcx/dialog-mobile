@@ -11,6 +11,19 @@
 		}
 		return source;
 	}
+	function getAnimationEndName(dom){
+		var cssAnimation = ["animation", "webkitAnimation"];
+		var animationEnd = {
+			"animation":"animationend",
+			"webkitAnimation":"webkitAnimationEnd"
+		};
+		for(var i = 0; i < cssAnimation.length; i++){
+			if(dom.style[cssAnimation[i]] != undefined){
+				return animationEnd[cssAnimation[i]];
+			}
+		}
+		return undefined;
+	}
 	function getFontSize(){
 		var clientWidth = document.documentElement.clientWidth;
 		if(clientWidth < 640)
@@ -36,18 +49,12 @@
 			body.appendChild(bg);
 			body.appendChild(dom);
 			
-			var isAnimationEnd = false;
-			if(dom.style["webkitAnimation"] != undefined || dom.style["animation"] != undefined){
-				isAnimationEnd = true;
-			}
+			var animationEndName = getAnimationEndName(dom);
 			function handleClose(){
-				if(isAnimationEnd){
+				if(animationEndName){
 					layer.close([bg]);
 					addClass(dom, options.closeAnimation);
-					dom.addEventListener("webkitAnimationEnd", function(){
-						layer.close([dom]);
-					});
-					dom.addEventListener("animationend", function(){
+					dom.addEventListener(animationEndName, function(){
 						layer.close([dom]);
 					});
 				}else{
