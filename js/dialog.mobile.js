@@ -5,13 +5,13 @@
 		newclass.push(c);
 		e.className = newclass.join(" ");
 	};
-	function extend(source, target){
-		for(var key in target){
+	function extend(source, target) {
+		for (var key in target) {
 			source[key] = target[key];
 		}
 		return source;
 	}
-	function getAnimationEndName(dom){
+	function getAnimationEndName(dom) {
 		var cssAnimation = ["animation", "webkitAnimation"];
 		var animationEnd = {
 			"animation":"animationend",
@@ -24,7 +24,7 @@
 		}
 		return undefined;
 	}
-	function getFontSize(){
+	function getFontSize() {
 		var clientWidth = document.documentElement.clientWidth;
 		if(clientWidth < 640)
 			return 16 * (clientWidth / 375) + "px";
@@ -33,15 +33,15 @@
 	}
 	
 	var layer = {
-		initOpen: function(dom, options){
+		initOpen: function(dom, options) {
 			dom.style.fontSize = getFontSize();
 						
 			var body = document.querySelector("body");
 			var bg = document.createElement("div");
 			addClass(bg, "mobile-dialog-bg");
 			
-			if(options.bottom){
-				bg.addEventListener("click", function(){
+			if (options.bottom) {
+				bg.addEventListener("click", function() {
 					handleClose();
 				});
 			}
@@ -50,53 +50,53 @@
 			body.appendChild(dom);
 			
 			var animationEndName = getAnimationEndName(dom);
-			function handleClose(){
-				if(animationEndName){
+			function handleClose() {
+				if (animationEndName) {
 					layer.close([bg]);
 					addClass(dom, options.closeAnimation);
-					dom.addEventListener(animationEndName, function(){
+					dom.addEventListener(animationEndName, function() {
 						layer.close([dom]);
 					});
-				}else{
+				} else {
 					layer.close([bg, dom]);
 				}
 			}
 			
 			//set button click event
-			options.btns.forEach(function(btn, i){
-				if(i != 0 && i <= options.btns.length - 1){
-					if(!options.bottom){
-						btn.addEventListener("click", function(){
+			options.btns.forEach(function(btn, i) {
+				if (i != 0 && i <= options.btns.length - 1) {
+					if (!options.bottom){
+						btn.addEventListener("click", function() {
 							handleClose();
 							options.sureBtnClick();
 						});
-					}else{
-						btn.addEventListener("click", function(){
+					} else {
+						btn.addEventListener("click", function() {
 							handleClose();
 							options.btnClick(this.getAttribute("i"));
 						});
 					}
-				}else{
+				} else {
 					btn.addEventListener("click", handleClose);
 				}
 			});
 			
-			if(!options.bottom){
+			if (!options.bottom) {
 				//set position
 				dom.style.top = (document.documentElement.clientHeight - dom.offsetHeight) / 2 + "px";
 				dom.style.left = (document.documentElement.clientWidth - dom.offsetWidth) / 2 + "px";
 			}
 		},
-		close: function(doms){
+		close: function(doms) {
 			var body = document.querySelector("body");
-			for(var i = 0; i < doms.length; i++){
+			for (var i = 0; i < doms.length; i++) {
 				body.removeChild(doms[i]);
 			}
 		}
 	};
 	
 	var dialog = {
-		alert: function(content){
+		alert: function(content) {
 			var btn = document.createElement("div");
 			btn.innerText = "确定";
 			addClass(btn, "dialog-button");
@@ -106,7 +106,7 @@
 			
 			this.open(content, opts);
 		},
-		confirm: function(content, options){
+		confirm: function(content, options) {
 			var opts = {
 				sureBtnText: "确定",
 				sureBtnClick: function(){}
@@ -124,7 +124,7 @@
 			opts.btns = [cancelBtn, sureBtn];
 			this.open(content, opts);
 		},
-		open: function(content, options){
+		open: function(content, options) {
 			var dialog = document.createElement("div");
 			var dialogContent = document.createElement("div");
 			
@@ -136,22 +136,22 @@
 			
 			dialog.appendChild(dialogContent);
 			
-			options.btns.forEach(function(btn, i){
+			options.btns.forEach(function(btn, i) {
 				dialog.appendChild(btn);
 			});
 			options.closeAnimation = "animation-zoom-out";
 			
 			layer.initOpen(dialog, options);
 		},
-		showBottom: function(options){
+		showBottom: function(options) {
 			var opts = {
 				btn: ["删除"],
 				btnColor: [],
-				btnClick: function(index){}
+				btnClick: function(index) {}
 			};
 			opts = extend(opts, options);
 			opts.bottom = true;
-			if(opts.btn.length == 1 && opts.btn[0] == "删除"){
+			if (opts.btn.length == 1 && opts.btn[0] == "删除") {
 				opts.btnColor = ["#EE2C2C"];
 			}
 			
@@ -169,7 +169,7 @@
 			
 			opts.btns = [];
 			opts.btns.push(cancelBtn);
-			opts.btn.forEach(function(btn, i){
+			opts.btn.forEach(function(btn, i) {
 				var btn = document.createElement("div");
 				btn.innerText = opts.btn[i];
 				btn.setAttribute("i", i + 1);
@@ -183,7 +183,7 @@
 			
 			layer.initOpen(bottomDialog, opts);
 		},
-		toast: function(content, time){
+		toast: function(content, time) {
 			time = time || 3;
 			var toast = document.createElement("div");
 			var toastContent = document.createElement("div");
@@ -202,12 +202,12 @@
 			toast.style.fontSize = getFontSize();
 			toast.style.left = (document.documentElement.clientWidth - toast.offsetWidth) / 2 + "px";
 			
-			setTimeout(function(){
+			setTimeout(function() {
 				body.removeChild(toast);
 			}, time * 1000);
 		},
 		loadElement: [],
-		loading: function(options){
+		loading: function(options) {
 			var opts = {
 				src: "img",
 				hint: ""
@@ -224,7 +224,7 @@
 			img.src = opts.src + "/loading.gif";
 			loading.appendChild(img);
 			
-			if(opts.hint){
+			if (opts.hint) {
 				var loadingContent = document.createElement("div");
 				addClass(loadingContent, "loading-content");
 				loadingContent.innerText = opts.hint;
@@ -242,11 +242,11 @@
 			this.loadElement.push(loadingBg);
 			this.loadElement.push(loading);
 		},
-		closeLoading: function(){
+		closeLoading: function() {
 			layer.close(this.loadElement);
 			this.loadElement = [];
 		}
 	}
 	
-	window.dialog = dialog;
+	window.mcxDialog = dialog;
 })(window);
