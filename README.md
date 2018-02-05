@@ -1,2 +1,2 @@
 # dialog-mobile
-dialog for mobile web page
+Dialog for mobile web page
