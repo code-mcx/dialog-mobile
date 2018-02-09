@@ -1,0 +1,41 @@
+{
+  "name": "mcx-dialog-mobile",
+  "author": "mcx",
+  "version": "0.0.1",
+  "description": "A dialog plugin for mobile web page based on primary javascript",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.9",
+    "file-loader": "^1.1.6",
+    "style-loader": "^0.20.1",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "dev": "webpack --config webpack.conf.js",
+    "build": "babel ./src --out-dir ./dist --ignore main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code-mcx/mcx-dialog-mobile.git"
+  },
+  "keywords": [
+    "dialog",
+    "mobile",
+    "vue",
+    "react"
+  ],
+  "files": [
+    "src",
+    "dist"
+  ],
+  "main": "dist/mcx-dialog.common.js",
+  "module": "dist/mcx-dialog.esm.js",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/code-mcx/mcx-dialog-mobile/issues"
+  },
+  "homepage": "https://github.com/code-mcx/mcx-dialog-mobile#readme"
+}

@@ -2,15 +2,15 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>dialog移动端对话框</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="css/dialog.mobile.css"/>
-		<script type="text/javascript" src="js/dialog.mobile.js"></script>
+		<title>mcx-dialog移动端弹框</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"/>
+		<link rel="stylesheet" type="text/css" href="dist/css/dialog-mobile.css"/>
+		<script type="text/javascript" src="dist/mcx-dialog.js"></script>
 		<style>
-			body{
+			body {
 				font-family: arial;
 			}
-			button{
+			button {
 				border: none;
 				background-color: #E2E2E2;
 				padding: 6px 12px;
@@ -132,18 +132,20 @@
 		//loading
 		
 		//可设置参数
-		//src: "img",  //loading图所在路径 默认为img。表示该页面和img为同一级
+		//src: "img",  //loading图所在路径 默认为img，表示该页面和img为同一级。注意该参数在npm环境中无效
 		//hint: "加载中..."  //指定提示内容
 		document.getElementById("button-loading").onclick = function(){
-			mcxDialog.loading();
+			mcxDialog.loading({src: "dist/img"});
 		};
 		document.getElementById("button-loading-content").onclick = function(){
 			mcxDialog.loading({
+				src: "dist/img",
 				hint: "加载中..."  //指定提示内容
 			});
 		};
 		document.getElementById("button-loading-close").onclick = function(){
 			mcxDialog.loading({
+				src: "dist/img",
 				hint: "加载中..."  //指定提示内容
 			});
 			setTimeout(function(){

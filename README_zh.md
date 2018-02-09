@@ -4,22 +4,18 @@
   <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/language-javascript-green.svg" alt="mcx-dialog-mobile"></a>
   <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/npm-v0.0.1-blue.svg" alt="mcx-dialog-mobile"></a>
 </p>
-<p>
-  <a href="https://github.com/code-mcx/mcx-dialog-mobile/blob/master/README_zh.md">中文文档</a>
-</p>
 
 A dialog plugin for mobile web page based on primary javascript
 
 # Description
 
-This dialog is implemented with primary javascript. It is used to the mobile web terminal，and it can
-be use with vue, react
+这个对话框是用原生javascript实现的。 它使用在移动web端，它可以与vue、react一起使用
 
-# Getting started
+# 入门
 
-## Browser
+## 浏览器
 
-First lead into css and js, they are in dist directory. You can't move any things under the dist directory
+首先引入CSS和js，它们位于dist目录中。你不能在dist目录下移动任何东西directory
 
 ```html
 <!DOCTYPE html>
@@ -35,7 +31,7 @@ First lead into css and js, they are in dist directory. You can't move any thing
 </html>
 ```
 
-Then you can get an object named `mcxDialog`
+然后，你可以得到一个名为mcxDialog的对象
 
 ```javascript
 <script type="text/javascript">
@@ -55,17 +51,17 @@ Then you can get an object named `mcxDialog`
   mcxDialog.showBottom();
 </script>
 ```
-More use see the [index.html](https://github.com/code-mcx/mcx-dialog-mobile/blob/master/index.html)
+更多使用请参见 [index.html](https://github.com/code-mcx/mcx-dialog-mobile/blob/master/index.html)
 
 ## Npm
 
-If you are useing npm, first install this package
+如果你正在使用npm，先安装插件包
 
 ```
 npm install mcx-dialog-mobile
 ```
 
-Import dependency
+导入依赖
 
 ```javascript
 // CommonJS
@@ -77,7 +73,7 @@ import McxDialog from "mcx-dialog-mobile"
 
 ### Vue
 
-mcx-dialog provided better operations in Vue
+mcx-dialog 在vue中提供了更好的操作
 
 ```javascript
 import McxDialog from "mcx-dialog-mobile"
@@ -85,7 +81,7 @@ import McxDialog from "mcx-dialog-mobile"
 Vue.use(McxDialog)
 ```
 
-In single page application, call it in any where
+在单页应用程序中，可以在任何地方调用它
 
 ```javascript
 <template>
@@ -123,7 +119,7 @@ export default {
 ```
 ### React
 
-In react, you mast import it when you need to use
+在React中，你需要在使用时导入它
 
 ```javascript
 import mcxDialog from "mcx-dialog-mobile"
