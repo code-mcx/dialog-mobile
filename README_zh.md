@@ -129,20 +129,20 @@ import mcxDialog from "mcx-dialog-mobile"
 handleClick = (type) => {
   switch (type) {
     case "alert":
-	  mcxDialog.alert("hi, 我是alert");
-	  break;
-	case "confirm":
-	  mcxDialog.confirm("hi, 我是confirm");
-	  break;
-	case "toast":
-	  mcxDialog.toast("hi，我是toast");
-	  break;
-	case "loading":
-	  mcxDialog.loading();
-	  break;
-	case "bottom":
-	  mcxDialog.showBottom();
-	  break;
+      mcxDialog.alert("hi, 我是alert");
+      break;
+    case "confirm":
+      mcxDialog.confirm("hi, 我是confirm");
+      break;
+    case "toast":
+      mcxDialog.toast("hi，我是toast");
+      break;
+    case "loading":
+      mcxDialog.loading();
+      break;
+    case "bottom":
+      mcxDialog.showBottom();
+      break;
   }
 }
 render() {
