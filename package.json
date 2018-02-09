@@ -1,7 +1,7 @@
 {
   "name": "mcx-dialog-mobile",
   "author": "mcx",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A dialog plugin for mobile web page based on primary javascript",
   "devDependencies": {
     "babel-cli": "^6.26.0",
