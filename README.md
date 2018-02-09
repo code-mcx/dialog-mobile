@@ -8,8 +8,6 @@
   <a href="https://github.com/code-mcx/mcx-dialog-mobile/blob/master/README_zh.md">中文文档</a>
 </p>
 
-A dialog plugin for mobile web page based on primary javascript
-
 # Description
 
 This dialog is implemented with primary javascript. It is used to the mobile web terminal，and it can

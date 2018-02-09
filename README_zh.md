@@ -2,10 +2,8 @@
 
 <p>
   <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/language-javascript-green.svg" alt="mcx-dialog-mobile"></a>
-  <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/npm-v0.0.1-blue.svg" alt="mcx-dialog-mobile"></a>
+  <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/npm-v0.0.3-blue.svg" alt="mcx-dialog-mobile"></a>
 </p>
-
-A dialog plugin for mobile web page based on primary javascript
 
 # Description
 
