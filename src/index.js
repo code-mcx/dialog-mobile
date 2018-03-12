@@ -77,7 +77,7 @@ const layer = {
 						options.sureBtnClick();
 					});
 				} else {
-					btn.addEventListener("click", () => {
+					btn.addEventListener("click", function() {
 						handleClose();
 						options.btnClick(this.getAttribute("i"));
 					});

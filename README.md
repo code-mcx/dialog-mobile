@@ -2,7 +2,7 @@
 
 <p>
   <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/language-javascript-green.svg" alt="mcx-dialog-mobile"></a>
-  <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/npm-v0.0.5-blue.svg" alt="mcx-dialog-mobile"></a>
+  <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/npm-v0.1.0-blue.svg" alt="mcx-dialog-mobile"></a>
 </p>
 <p>
   <a href="https://github.com/code-mcx/mcx-dialog-mobile/blob/master/README_zh.md">中文文档</a>

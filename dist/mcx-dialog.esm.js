@@ -1,5 +1,5 @@
 /**
- * Mcx Dialog Mobile v0.0.5
+ * Mcx Dialog Mobile v0.1.0
  * Copyright (C) 2018 mcx
  * https://github.com/code-mcx/mcx-dialog-mobile
  */
@@ -39,7 +39,6 @@ function getFontSize() {
 
 var layer = {
 	initOpen: function initOpen(dom, options) {
-		var _this = this;
 
 		dom.style.fontSize = getFontSize();
 
@@ -83,7 +82,7 @@ var layer = {
 				} else {
 					btn.addEventListener("click", function () {
 						handleClose();
-						options.btnClick(_this.getAttribute("i"));
+						options.btnClick(this.getAttribute("i"));
 					});
 				}
 			} else {

@@ -84,35 +84,25 @@
 	left: 0;
 	bottom: 0;
 	z-index: 10001;
-	width: 94%;
-	margin-left: 3%;
+	width: 100%;
 	color: #333333;
+	background-color: #EEEEEE;
 }
 .dialog-mobile-bottom .bottom-btn-item {
 	text-align: center;
 }
 .bottom-btn-item .dialog-item-btn {
-	font-size: 17px;
 	background: #FFFFFF;
 	padding: 0.5em 0;
-	border-bottom: 1px solid #D6D6D6;
-}
-.bottom-btn-item .dialog-item-btn:first-child {
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
-	border-top: none;
+	border-bottom: 1px solid #EEEEEE;
 }
 .bottom-btn-item .dialog-item-btn:last-child {
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
 	border-bottom: none;
 }
 .dialog-mobile-bottom .dialog-cancel-btn {
-	font-size: 17px;
-	margin: 0.8em 0;
+	margin-top: 0.6em;
 	text-align: center;
 	background: #FFFFFF;
-	border-radius: 3px;
 	padding: 0.5em 0;
 }
 /*toast*/
