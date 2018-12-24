@@ -1,5 +1,5 @@
 /**
- * Mcx Dialog Mobile v0.1.0
+ * Mcx Dialog Mobile v0.1.1
  * Copyright (C) 2018 mcx
  * https://github.com/code-mcx/mcx-dialog-mobile
  */

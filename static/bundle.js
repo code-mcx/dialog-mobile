@@ -73,7 +73,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (typeof window !== "undefined") {
-	window.mcxDialog = __WEBPACK_IMPORTED_MODULE_0__index_js__["a" /* default */];
+  window.mcxDialog = __WEBPACK_IMPORTED_MODULE_0__index_js__["a" /* default */];
 }
 
 /***/ }),
@@ -81,276 +81,292 @@ if (typeof window !== "undefined") {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_dialog_mobile_css__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_dialog_mobile_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__css_dialog_mobile_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_compatible__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_dialog_mobile_css__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_dialog_mobile_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__css_dialog_mobile_css__);
+
+
 
 
 function addClass(e, c) {
-	var newclass = e.className.split(" ");
-	if (e.className === "") newclass = [];
-	newclass.push(c);
-	e.className = newclass.join(" ");
-};
+  var newclass = e.className.split(" ");
+  if (e.className === "") newclass = [];
+  newclass.push(c);
+  e.className = newclass.join(" ");
+}
 
 function extend(source, target) {
-	for (var key in target) {
-		source[key] = target[key];
-	}
-	return source;
+  for (var key in target) {
+    source[key] = target[key];
+  }
+  return source;
 }
 
-function getAnimationEndName(dom) {
-	var cssAnimation = ["animation", "webkitAnimation"];
-	var animationEnd = {
-		"animation": "animationend",
-		"webkitAnimation": "webkitAnimationEnd"
-	};
-	for (var i = 0; i < cssAnimation.length; i++) {
-		if (dom.style[cssAnimation[i]] != undefined) {
-			return animationEnd[cssAnimation[i]];
-		}
-	}
-	return undefined;
-}
 function getFontSize() {
-	var clientWidth = document.documentElement.clientWidth;
-	if (clientWidth < 640) return 16 * (clientWidth / 375) + "px";else return 16;
+  var clientWidth = document.documentElement.clientWidth;
+  if (clientWidth < 640) {
+    return 16 * (clientWidth / 375) + "px";
+  } else {
+    return 16;
+  }
 }
 
 var layer = {
-	initOpen: function initOpen(dom, options) {
-		dom.style.fontSize = getFontSize();
+  initOpen: function initOpen(dom, options) {
+    dom.style.fontSize = getFontSize();
 
-		var body = document.querySelector("body");
-		var bg = document.createElement("div");
-		addClass(bg, "dialog-mobile-bg");
-		if (options.showBottom == true) {
-			addClass(bg, "animation-bg-fadeIn");
-		}
+    var body = document.querySelector("body");
+    var bg = document.createElement("div");
+    addClass(bg, "dialog-mobile-bg");
+    if (options.showBottom == true) {
+      addClass(bg, "animation-bg-fadeIn");
+    }
 
-		if (options.bottom) {
-			bg.addEventListener("click", function () {
-				handleClose();
-			});
-		}
+    if (options.bottom) {
+      bg.addEventListener("click", function () {
+        handleClose();
+      });
+    }
 
-		body.appendChild(bg);
-		body.appendChild(dom);
+    body.appendChild(bg);
+    body.appendChild(dom);
 
-		var animationEndName = getAnimationEndName(dom);
-		function handleClose() {
-			if (animationEndName) {
-				layer.close([bg]);
-				addClass(dom, options.closeAnimation);
-				dom.addEventListener(animationEndName, function () {
-					layer.close([dom]);
-				});
-			} else {
-				layer.close([bg, dom]);
-			}
-		}
+    var animationEndName = Object(__WEBPACK_IMPORTED_MODULE_0__utils_compatible__["a" /* getAnimationEndName */])(dom);
+    function handleClose() {
+      if (animationEndName) {
+        layer.close([bg]);
+        addClass(dom, options.closeAnimation);
+        dom.addEventListener(animationEndName, function () {
+          layer.close([dom]);
+        });
+      } else {
+        layer.close([bg, dom]);
+      }
+    }
 
-		//set button click event
-		options.btns.forEach(function (btn, i) {
-			if (i != 0 && i <= options.btns.length - 1) {
-				if (!options.bottom) {
-					btn.addEventListener("click", function () {
-						handleClose();
-						options.sureBtnClick();
-					});
-				} else {
-					btn.addEventListener("click", function () {
-						handleClose();
-						options.btnClick(this.getAttribute("i"));
-					});
-				}
-			} else {
-				btn.addEventListener("click", handleClose);
-			}
-		});
+    //set button click event
+    options.btns.forEach(function (btn, i) {
+      if (i != 0 && i <= options.btns.length - 1) {
+        if (!options.bottom) {
+          btn.addEventListener("click", function () {
+            handleClose();
+            options.sureBtnClick();
+          });
+        } else {
+          btn.addEventListener("click", function () {
+            handleClose();
+            options.btnClick(this.getAttribute("i"));
+          });
+        }
+      } else {
+        btn.addEventListener("click", handleClose);
+      }
+    });
 
-		if (!options.bottom) {
-			//set position
-			dom.style.top = (document.documentElement.clientHeight - dom.offsetHeight) / 2 + "px";
-			dom.style.left = (document.documentElement.clientWidth - dom.offsetWidth) / 2 + "px";
-		}
-	},
-	close: function close(doms) {
-		var body = document.querySelector("body");
-		for (var i = 0; i < doms.length; i++) {
-			body.removeChild(doms[i]);
-		}
-	}
+    if (!options.bottom) {
+      //set position
+      dom.style.top = (document.documentElement.clientHeight - dom.offsetHeight) / 2 + "px";
+      dom.style.left = (document.documentElement.clientWidth - dom.offsetWidth) / 2 + "px";
+    }
+  },
+  close: function close(doms) {
+    var body = document.querySelector("body");
+    for (var i = 0; i < doms.length; i++) {
+      body.removeChild(doms[i]);
+    }
+  }
 };
 
 var mcxDialog = {
-	alert: function alert(content) {
-		var btn = document.createElement("div");
-		btn.innerText = "确定";
-		addClass(btn, "dialog-button");
+  alert: function alert(content) {
+    var btn = document.createElement("div");
+    btn.innerText = "确定";
+    addClass(btn, "dialog-button");
 
-		var opts = {};
-		opts.btns = [btn];
+    var opts = {};
+    opts.btns = [btn];
 
-		this.open(content, opts);
-	},
-	confirm: function confirm(content, options) {
-		var opts = {
-			sureBtnText: "确定",
-			sureBtnClick: function sureBtnClick() {}
-		};
-		opts = extend(opts, options);
+    this.open(content, opts);
+  },
+  confirm: function confirm(content, options) {
+    var opts = {
+      sureBtnText: "确定",
+      sureBtnClick: function sureBtnClick() {}
+    };
+    opts = extend(opts, options);
 
-		var cancelBtn = document.createElement("div");
-		cancelBtn.innerText = "取消";
-		addClass(cancelBtn, "dialog-cancel-button");
+    var cancelBtn = document.createElement("div");
+    cancelBtn.innerText = "取消";
+    addClass(cancelBtn, "dialog-cancel-button");
 
-		var sureBtn = document.createElement("div");
-		sureBtn.innerText = opts.sureBtnText;
-		addClass(sureBtn, "dialog-sure-button");
+    var sureBtn = document.createElement("div");
+    sureBtn.innerText = opts.sureBtnText;
+    addClass(sureBtn, "dialog-sure-button");
 
-		opts.btns = [cancelBtn, sureBtn];
-		this.open(content, opts);
-	},
-	open: function open(content, options) {
-		var dialog = document.createElement("div");
-		var dialogContent = document.createElement("div");
+    opts.btns = [cancelBtn, sureBtn];
+    this.open(content, opts);
+  },
+  open: function open(content, options) {
+    var dialog = document.createElement("div");
+    var dialogContent = document.createElement("div");
 
-		addClass(dialog, "dialog-mobile");
-		addClass(dialog, "animation-zoom-in");
-		addClass(dialogContent, "dialog-content");
+    addClass(dialog, "dialog-mobile");
+    addClass(dialog, "animation-zoom-in");
+    addClass(dialogContent, "dialog-content");
 
-		dialogContent.innerText = content;
+    dialogContent.innerText = content;
 
-		dialog.appendChild(dialogContent);
+    dialog.appendChild(dialogContent);
 
-		options.btns.forEach(function (btn, i) {
-			dialog.appendChild(btn);
-		});
-		options.closeAnimation = "animation-zoom-out";
+    options.btns.forEach(function (btn, i) {
+      dialog.appendChild(btn);
+    });
+    options.closeAnimation = "animation-zoom-out";
 
-		layer.initOpen(dialog, options);
-	},
-	showBottom: function showBottom(options) {
-		var opts = {
-			btn: ["删除"],
-			btnColor: [],
-			btnClick: function btnClick(index) {}
-		};
-		opts = extend(opts, options);
-		opts.bottom = true;
-		if (opts.btn.length == 1 && opts.btn[0] == "删除") {
-			opts.btnColor = ["#EE2C2C"];
-		}
+    layer.initOpen(dialog, options);
+  },
+  showBottom: function showBottom(options) {
+    var opts = {
+      btn: ["删除"],
+      btnColor: [],
+      btnClick: function btnClick(index) {}
+    };
+    opts = extend(opts, options);
+    opts.bottom = true;
+    if (opts.btn.length == 1 && opts.btn[0] == "删除") {
+      opts.btnColor = ["#EE2C2C"];
+    }
 
-		var bottomDialog = document.createElement("div");
-		var dialogItem = document.createElement("div");
-		var cancelBtn = document.createElement("div");
-		cancelBtn.innerText = "取消";
-		addClass(bottomDialog, "dialog-mobile-bottom");
-		addClass(bottomDialog, "animation-bottom-in");
-		addClass(dialogItem, "bottom-btn-item");
-		addClass(cancelBtn, "dialog-cancel-btn");
+    var bottomDialog = document.createElement("div");
+    var dialogItem = document.createElement("div");
+    var cancelBtn = document.createElement("div");
+    cancelBtn.innerText = "取消";
+    addClass(bottomDialog, "dialog-mobile-bottom");
+    addClass(bottomDialog, "animation-bottom-in");
+    addClass(dialogItem, "bottom-btn-item");
+    addClass(cancelBtn, "dialog-cancel-btn");
 
-		bottomDialog.appendChild(dialogItem);
-		bottomDialog.appendChild(cancelBtn);
+    bottomDialog.appendChild(dialogItem);
+    bottomDialog.appendChild(cancelBtn);
 
-		opts.btns = [];
-		opts.btns.push(cancelBtn);
-		opts.btn.forEach(function (b, i) {
-			var btn = document.createElement("div");
-			btn.innerText = opts.btn[i];
-			btn.setAttribute("i", i + 1);
-			addClass(btn, "dialog-item-btn");
-			if (opts.btnColor[i]) btn.style.color = opts.btnColor[i];
-			dialogItem.appendChild(btn);
-			opts.btns.push(btn);
-		});
-		opts.closeAnimation = "animation-bottom-out";
-		opts.showBottom = true;
+    opts.btns = [];
+    opts.btns.push(cancelBtn);
+    opts.btn.forEach(function (b, i) {
+      var btn = document.createElement("div");
+      btn.innerText = opts.btn[i];
+      btn.setAttribute("i", i + 1);
+      addClass(btn, "dialog-item-btn");
+      if (opts.btnColor[i]) btn.style.color = opts.btnColor[i];
+      dialogItem.appendChild(btn);
+      opts.btns.push(btn);
+    });
+    opts.closeAnimation = "animation-bottom-out";
+    opts.showBottom = true;
 
-		layer.initOpen(bottomDialog, opts);
-	},
-	toast: function toast(content, time) {
-		time = time || 3;
-		var toast = document.createElement("div");
-		var toastContent = document.createElement("div");
+    layer.initOpen(bottomDialog, opts);
+  },
+  toast: function toast(content, time) {
+    time = time || 3;
+    var toast = document.createElement("div");
+    var toastContent = document.createElement("div");
 
-		addClass(toast, "dialog-mobile-toast");
-		addClass(toast, "animation-fade-in");
-		addClass(toastContent, "toast-content");
+    addClass(toast, "dialog-mobile-toast");
+    addClass(toast, "animation-fade-in");
+    addClass(toastContent, "toast-content");
 
-		toastContent.innerText = content;
+    toastContent.innerText = content;
 
-		toast.appendChild(toastContent);
+    toast.appendChild(toastContent);
 
-		var body = document.querySelector("body");
-		body.appendChild(toast);
+    var body = document.querySelector("body");
+    body.appendChild(toast);
 
-		toast.style.fontSize = getFontSize();
-		toast.style.left = (document.documentElement.clientWidth - toast.offsetWidth) / 2 + "px";
+    toast.style.fontSize = getFontSize();
+    toast.style.left = (document.documentElement.clientWidth - toast.offsetWidth) / 2 + "px";
 
-		setTimeout(function () {
-			body.removeChild(toast);
-		}, time * 1000);
-	},
+    setTimeout(function () {
+      body.removeChild(toast);
+    }, time * 1000);
+  },
 
-	loadElement: [],
-	loading: function loading(options) {
-		var opts = {
-			src: "img",
-			hint: ""
-		};
-		opts = extend(opts, options);
+  loadElement: [],
+  loading: function loading(options) {
+    var opts = {
+      src: "img",
+      hint: ""
+    };
+    opts = extend(opts, options);
 
-		var loadingBg = document.createElement("div");
-		var loading = document.createElement("div");
-		var img = document.createElement("img");
+    var loadingBg = document.createElement("div");
+    var loading = document.createElement("div");
+    var img = document.createElement("img");
 
-		addClass(loadingBg, "mobile-loading-bg");
-		addClass(loading, "mobile-loading");
-		addClass(loading, "animation-zoom-in");
-		//img.src = opts.src + "/loading.gif";
-		img.src = __webpack_require__(7);
-		loading.appendChild(img);
+    addClass(loadingBg, "mobile-loading-bg");
+    addClass(loading, "mobile-loading");
+    addClass(loading, "animation-zoom-in");
+    // img.src = opts.src + "/loading.gif";
+    img.src = __webpack_require__(8);
+    loading.appendChild(img);
 
-		if (opts.hint) {
-			var loadingContent = document.createElement("div");
-			addClass(loadingContent, "loading-content");
-			loadingContent.innerText = opts.hint;
-			loading.appendChild(loadingContent);
-		}
+    if (opts.hint) {
+      var loadingContent = document.createElement("div");
+      addClass(loadingContent, "loading-content");
+      loadingContent.innerText = opts.hint;
+      loading.appendChild(loadingContent);
+    }
 
-		var body = document.querySelector("body");
-		body.appendChild(loadingBg);
-		body.appendChild(loading);
+    var body = document.querySelector("body");
+    body.appendChild(loadingBg);
+    body.appendChild(loading);
 
-		loading.style.fontSize = getFontSize();
-		loading.style.left = (document.documentElement.clientWidth - loading.offsetWidth) / 2 + "px";
-		loading.style.top = (document.documentElement.clientHeight - loading.offsetHeight) / 2 + "px";
+    loading.style.fontSize = getFontSize();
+    loading.style.left = (document.documentElement.clientWidth - loading.offsetWidth) / 2 + "px";
+    loading.style.top = (document.documentElement.clientHeight - loading.offsetHeight) / 2 + "px";
 
-		this.loadElement.push(loadingBg);
-		this.loadElement.push(loading);
-	},
-	closeLoading: function closeLoading() {
-		layer.close(this.loadElement);
-		this.loadElement = [];
-	}
+    this.loadElement.push(loadingBg);
+    this.loadElement.push(loading);
+  },
+  closeLoading: function closeLoading() {
+    layer.close(this.loadElement);
+    this.loadElement = [];
+  }
 };
 
 // providing better operations in Vue
 mcxDialog.install = function (Vue, options) {
-	Vue.prototype.$mcxDialog = mcxDialog;
+  Vue.prototype.$mcxDialog = mcxDialog;
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (mcxDialog);
 
 /***/ }),
 /* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getAnimationEndName; });
+function getAnimationEndName(dom) {
+  var cssAnimation = ["animation", "webkitAnimation"];
+  var animationEnd = {
+    "animation": "animationend",
+    "webkitAnimation": "webkitAnimationEnd"
+  };
+  for (var i = 0; i < cssAnimation.length; i++) {
+    if (dom.style[cssAnimation[i]] != undefined) {
+      return animationEnd[cssAnimation[i]];
+    }
+  }
+  return undefined;
+}
+
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(3);
+var content = __webpack_require__(4);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -364,7 +380,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(5)(content, options);
+var update = __webpack_require__(6)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -396,21 +412,21 @@ if(false) {
 }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".dialog-mobile-bg {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10000;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tbackground-color: rgba(0, 0, 0, 0.7);\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n/*alert confirm*/\r\n.dialog-mobile {\r\n\tposition: fixed;\r\n\ttop: 50%;\r\n\tleft: 0;\r\n\tz-index: 10001;\r\n\twidth: 20em;\r\n\tborder-radius: 5px;\r\n\tbackground-color: #FFFFFF;\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n.dialog-mobile .dialog-content {\r\n\tpadding: 2.5em 1em;\r\n\ttext-align: center;\r\n\tcolor: #333333;\r\n\tborder-radius: 5px 5px 0 0;\r\n\tposition: relative;\r\n}\r\n.dialog-mobile .dialog-content:after\r\n{\r\n\tcontent: \"\";\r\n\tposition: absolute;\r\n\tz-index: 10002;\r\n\tbottom: 0;\r\n\tleft: 0;\r\n\twidth: 100%;\r\n\theight: 1px;\r\n\tbackground-color: #CCCCCC;\r\n\t-webkit-transform: scaleY(.5);\r\n\ttransform: scaleY(.5);\r\n}\r\n.dialog-mobile .dialog-button {\r\n\theight: 3em;\r\n\tline-height: 3em;\r\n\ttext-align: center;\r\n\tborder-radius: 0 0 5px 5px;\r\n\tcolor: #000000;\r\n\tbackground: #EEEEEE;\r\n}\r\n.dialog-mobile .dialog-sure-button,\r\n.dialog-mobile .dialog-cancel-button {\r\n\tfloat: left;\r\n\theight: 3em;\r\n\twidth: 50%;\r\n\tline-height: 3em;\r\n\ttext-align: center;\r\n\tbackground: #EEEEEE;\r\n}\r\n.dialog-mobile .dialog-sure-button {\r\n\tcolor: #1C86EE;\r\n\tborder-radius: 0 0 5px 0;\r\n\tposition: relative;\r\n}\r\n.dialog-mobile .dialog-sure-button:after {\r\n\tcontent: \"\";\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\twidth: 1px;\r\n\theight: 100%;\r\n\tbackground-color: #CCCCCC;\r\n\t-webkit-transform: scaleX(.5);\r\n\ttransform: scaleX(.5);\r\n}\r\n.dialog-mobile .dialog-cancel-button {\r\n\tcolor: #000000;\r\n\tborder-radius: 0 0 0 5px;\r\n}\r\n/*bottom dialog*/\r\n.dialog-mobile-bottom {\r\n\tposition: fixed;\r\n\tleft: 0;\r\n\tbottom: 0;\r\n\tz-index: 10001;\r\n\twidth: 100%;\r\n\tcolor: #333333;\r\n\tbackground-color: #EEEEEE;\r\n}\r\n.dialog-mobile-bottom .bottom-btn-item {\r\n\ttext-align: center;\r\n}\r\n.bottom-btn-item .dialog-item-btn {\r\n\tbackground: #FFFFFF;\r\n\tpadding: 0.5em 0;\r\n\tborder-bottom: 1px solid #D6D6D6;\r\n}\r\n.bottom-btn-item .dialog-item-btn:last-child {\r\n\tborder-bottom: none;\r\n}\r\n.dialog-mobile-bottom .dialog-cancel-btn {\r\n\tmargin-top: 0.6em;\r\n\ttext-align: center;\r\n\tbackground: #FFFFFF;\r\n\tpadding: 0.5em 0;\r\n}\r\n/*toast*/\r\n.dialog-mobile-toast {\r\n\tposition: fixed;\r\n\tbottom: 5em;\r\n}\r\n.dialog-mobile-toast .toast-content {\r\n\tpadding: 0.5em 1em;\r\n\tcolor: #FFFFFF;\r\n\tborder-radius: 2px;\r\n\tbackground-color: #333333;\r\n}\r\n/*loading*/\r\n.mobile-loading-bg {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10000;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tbackground-color: rgba(0, 0, 0, 0.3);\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n.mobile-loading {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10001;\r\n\tmin-width: 2em;\r\n\tmin-height: 2em;\r\n\tpadding: 0.8em 1.6em;\r\n\ttext-align: center;\r\n\tborder-radius: 2px;\r\n\tcolor: #FFFFF0;\r\n\tbackground-color: #0A0A0A;\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n/*animation*/\r\n.animation-zoom-in, .animation-zoom-out,\r\n.animation-bottom-in, .animation-bottom-out,\r\n.animation-bg-fadeIn {\r\n\t-webkit-animation-duration: 0.3s;\r\n\t-webkit-animation-fill-mode: both;\r\n\tanimation-duration: 0.3s;\r\n\tanimation-fill-mode: both;\r\n}\r\n.animation-fade-in, .animation-fade-out {\r\n\t-webkit-animation-duration: 1s;\r\n\t-webkit-animation-timing-function: ease-out;\r\n\t-webkit-animation-fill-mode: both;\r\n\tanimation-duration: 1s;\r\n\tanimation-timing-function: ease-out;\r\n\tanimation-fill-mode: both;\r\n}\r\n.animation-zoom-in {\r\n\t-webkit-animation-name: zoomIn;\r\n\tanimation-name: zoomIn;\r\n}\r\n.animation-zoom-out {\r\n\t-webkit-animation-name: zoomOut;\r\n\tanimation-name: zoomOut;\r\n}\r\n.animation-fade-in {\r\n\t-webkit-animation-name: fadeIn;\r\n\tanimation-name: fadeIn;\r\n}\r\n.animation-fade-out {\r\n\t-webkit-animation-name: fadeOut;\r\n\tanimation-name: fadeOut;\r\n}\r\n.animation-bottom-in {\r\n\t-webkit-animation-name: bottomIn;\r\n\tanimation-name: bottomIn;\r\n}\r\n.animation-bottom-out {\r\n\t-webkit-animation-name: bottomOut;\r\n\tanimation-name: bottomOut;\r\n}\r\n.animation-bg-fadeIn {\r\n\t-webkit-animation-name: fadeIn;\r\n\tanimation-name: fadeIn;\r\n}\r\n\r\n@-webkit-keyframes zoomIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t\t-webkit-transform: scale(0, 0);\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t\t-webkit-transform: scale(1, 1);\r\n\t}\r\n}\r\n@-webkit-keyframes zoomOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t\t-webkit-transform: scale(1, 1);\r\n\t}\r\n\t90%{\r\n\t\t-webkit-transform: scale(0.3, 0.3);\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t\t-webkit-transform: scale(0, 0);\r\n\t}\r\n}\r\n@keyframes zoomIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t\ttransform: scale(0, 0);\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t\ttransform: scale(1, 1);\r\n\t}\r\n}\r\n@keyframes zoomOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t\ttransform: scale(1, 1);\r\n\t}\r\n\t90%{\r\n\t\ttransform: scale(0.3, 0.3);\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t\ttransform: scale(0, 0);\r\n\t}\r\n}\r\n@-webkit-keyframes fadeIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t}\r\n}\r\n@-webkit-keyframes fadeOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t}\r\n\t30%{\r\n\t\topacity: 0.3;\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t}\r\n}\r\n@keyframes fadeIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t}\r\n}\r\n@keyframes fadeOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t}\r\n\t30%{\r\n\t\topacity: 0.3;\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t}\r\n}\r\n@-webkit-keyframes bottomIn {\r\n\tfrom{\r\n\t\tbottom: -1000px;\r\n\t}\r\n\tto{\r\n\t\tbottom: 0;\r\n\t}\r\n}\r\n@-webkit-keyframes bottomOut {\r\n\tfrom{\r\n\t\tbottom: 0;\r\n\t}\r\n\tto{\r\n\t\tbottom: -1000px;\r\n\t}\r\n}\r\n@keyframes bottomIn {\r\n\tfrom{\r\n\t\tbottom: -1000px;\r\n\t}\r\n\tto{\r\n\t\tbottom: 0;\r\n\t}\r\n}\r\n@keyframes bottomOut {\r\n\tfrom{\r\n\t\tbottom: 0;\r\n\t}\r\n\tto{\r\n\t\tbottom: -1000px;\r\n\t}\r\n}", ""]);
+exports.push([module.i, ".dialog-mobile-bg {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10000;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tbackground-color: rgba(0, 0, 0, 0.7);\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n/*alert confirm*/\r\n.dialog-mobile {\r\n\tposition: fixed;\r\n\ttop: 50%;\r\n\tleft: 0;\r\n\tz-index: 10001;\r\n\twidth: 20em;\r\n\tborder-radius: 5px;\r\n\tbackground-color: #FFFFFF;\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n.dialog-mobile .dialog-content {\r\n\tpadding: 2.5em 1em;\r\n\ttext-align: center;\r\n\tcolor: #333333;\r\n\tborder-radius: 5px 5px 0 0;\r\n\tposition: relative;\r\n}\r\n.dialog-mobile .dialog-content:after\r\n{\r\n\tcontent: \"\";\r\n\tposition: absolute;\r\n\tz-index: 10002;\r\n\tbottom: 0;\r\n\tleft: 0;\r\n\twidth: 100%;\r\n\theight: 1px;\r\n\tbackground-color: #CCCCCC;\r\n\t-webkit-transform: scaleY(.5);\r\n\ttransform: scaleY(.5);\r\n}\r\n.dialog-mobile .dialog-button {\r\n\theight: 3em;\r\n\tline-height: 3em;\r\n\ttext-align: center;\r\n\tborder-radius: 0 0 5px 5px;\r\n\tcolor: #000000;\r\n\tbackground: #EEEEEE;\r\n}\r\n.dialog-mobile .dialog-sure-button,\r\n.dialog-mobile .dialog-cancel-button {\r\n\tfloat: left;\r\n\theight: 3em;\r\n\twidth: 50%;\r\n\tline-height: 3em;\r\n\ttext-align: center;\r\n\tbackground: #EEEEEE;\r\n}\r\n.dialog-mobile .dialog-sure-button {\r\n\tcolor: #1C86EE;\r\n\tborder-radius: 0 0 5px 0;\r\n\tposition: relative;\r\n}\r\n.dialog-mobile .dialog-sure-button:after {\r\n\tcontent: \"\";\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\twidth: 1px;\r\n\theight: 100%;\r\n\tbackground-color: #CCCCCC;\r\n\t-webkit-transform: scaleX(.5);\r\n\ttransform: scaleX(.5);\r\n}\r\n.dialog-mobile .dialog-cancel-button {\r\n\tcolor: #000000;\r\n\tborder-radius: 0 0 0 5px;\r\n}\r\n/*bottom dialog*/\r\n.dialog-mobile-bottom {\r\n\tposition: fixed;\r\n\tleft: 0;\r\n\tbottom: 0;\r\n\tz-index: 10001;\r\n\twidth: 100%;\r\n\tcolor: #333333;\r\n\tbackground-color: #EEEEEE;\r\n}\r\n.dialog-mobile-bottom .bottom-btn-item {\r\n\ttext-align: center;\r\n}\r\n.bottom-btn-item .dialog-item-btn {\r\n\tbackground: #FFFFFF;\r\n\tpadding: 0.5em 0;\r\n\tborder-bottom: 1px solid #EEEEEE;\r\n}\r\n.bottom-btn-item .dialog-item-btn:last-child {\r\n\tborder-bottom: none;\r\n}\r\n.dialog-mobile-bottom .dialog-cancel-btn {\r\n\tmargin-top: 0.6em;\r\n\ttext-align: center;\r\n\tbackground: #FFFFFF;\r\n\tpadding: 0.5em 0;\r\n}\r\n/*toast*/\r\n.dialog-mobile-toast {\r\n\tposition: fixed;\r\n\tbottom: 5em;\r\n}\r\n.dialog-mobile-toast .toast-content {\r\n\tpadding: 0.5em 1em;\r\n\tcolor: #FFFFFF;\r\n\tborder-radius: 2px;\r\n\tbackground-color: #333333;\r\n}\r\n/*loading*/\r\n.mobile-loading-bg {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10000;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tbackground-color: rgba(0, 0, 0, 0.3);\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n.mobile-loading {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10001;\r\n\tmin-width: 2em;\r\n\tmin-height: 2em;\r\n\tpadding: 0.8em 1.6em;\r\n\ttext-align: center;\r\n\tborder-radius: 2px;\r\n\tcolor: #FFFFF0;\r\n\tbackground-color: #0A0A0A;\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n/*animation*/\r\n.animation-zoom-in, .animation-zoom-out,\r\n.animation-bottom-in, .animation-bottom-out,\r\n.animation-bg-fadeIn {\r\n\t-webkit-animation-duration: 0.3s;\r\n\t-webkit-animation-fill-mode: both;\r\n\tanimation-duration: 0.3s;\r\n\tanimation-fill-mode: both;\r\n}\r\n.animation-fade-in, .animation-fade-out {\r\n\t-webkit-animation-duration: 1s;\r\n\t-webkit-animation-timing-function: ease-out;\r\n\t-webkit-animation-fill-mode: both;\r\n\tanimation-duration: 1s;\r\n\tanimation-timing-function: ease-out;\r\n\tanimation-fill-mode: both;\r\n}\r\n.animation-zoom-in {\r\n\t-webkit-animation-name: zoomIn;\r\n\tanimation-name: zoomIn;\r\n}\r\n.animation-zoom-out {\r\n\t-webkit-animation-name: zoomOut;\r\n\tanimation-name: zoomOut;\r\n}\r\n.animation-fade-in {\r\n\t-webkit-animation-name: fadeIn;\r\n\tanimation-name: fadeIn;\r\n}\r\n.animation-fade-out {\r\n\t-webkit-animation-name: fadeOut;\r\n\tanimation-name: fadeOut;\r\n}\r\n.animation-bottom-in {\r\n\t-webkit-animation-name: bottomIn;\r\n\tanimation-name: bottomIn;\r\n}\r\n.animation-bottom-out {\r\n\t-webkit-animation-name: bottomOut;\r\n\tanimation-name: bottomOut;\r\n}\r\n.animation-bg-fadeIn {\r\n\t-webkit-animation-name: fadeIn;\r\n\tanimation-name: fadeIn;\r\n}\r\n\r\n@-webkit-keyframes zoomIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t\t-webkit-transform: scale(0, 0);\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t\t-webkit-transform: scale(1, 1);\r\n\t}\r\n}\r\n@-webkit-keyframes zoomOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t\t-webkit-transform: scale(1, 1);\r\n\t}\r\n\t90%{\r\n\t\t-webkit-transform: scale(0.3, 0.3);\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t\t-webkit-transform: scale(0, 0);\r\n\t}\r\n}\r\n@keyframes zoomIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t\ttransform: scale(0, 0);\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t\ttransform: scale(1, 1);\r\n\t}\r\n}\r\n@keyframes zoomOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t\ttransform: scale(1, 1);\r\n\t}\r\n\t90%{\r\n\t\ttransform: scale(0.3, 0.3);\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t\ttransform: scale(0, 0);\r\n\t}\r\n}\r\n@-webkit-keyframes fadeIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t}\r\n}\r\n@-webkit-keyframes fadeOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t}\r\n\t30%{\r\n\t\topacity: 0.3;\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t}\r\n}\r\n@keyframes fadeIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t}\r\n}\r\n@keyframes fadeOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t}\r\n\t30%{\r\n\t\topacity: 0.3;\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t}\r\n}\r\n@-webkit-keyframes bottomIn {\r\n\tfrom{\r\n\t\tbottom: -1000px;\r\n\t}\r\n\tto{\r\n\t\tbottom: 0;\r\n\t}\r\n}\r\n@-webkit-keyframes bottomOut {\r\n\tfrom{\r\n\t\tbottom: 0;\r\n\t}\r\n\tto{\r\n\t\tbottom: -1000px;\r\n\t}\r\n}\r\n@keyframes bottomIn {\r\n\tfrom{\r\n\t\tbottom: -1000px;\r\n\t}\r\n\tto{\r\n\t\tbottom: 0;\r\n\t}\r\n}\r\n@keyframes bottomOut {\r\n\tfrom{\r\n\t\tbottom: 0;\r\n\t}\r\n\tto{\r\n\t\tbottom: -1000px;\r\n\t}\r\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /*
@@ -492,7 +508,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -558,7 +574,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(6);
+var	fixUrls = __webpack_require__(7);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -874,7 +890,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 
@@ -941,7 +957,7 @@ module.exports = function (css) {
 			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
 
 		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
 		  return fullMatch;
 		}
 
@@ -969,7 +985,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "1e64774e560028d1a949e65289f20265.gif";
