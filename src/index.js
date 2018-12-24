@@ -1,3 +1,5 @@
+import { getAnimationEndName } from "./utils/compatible"
+
 import "./css/dialog-mobile.css"
 
 function addClass(e, c) {
@@ -5,7 +7,7 @@ function addClass(e, c) {
 	if (e.className === "") newclass = [];
 	newclass.push(c);
 	e.className = newclass.join(" ");
-};
+}
 
 function extend(source, target) {
 	for (let key in target) {
@@ -14,25 +16,13 @@ function extend(source, target) {
 	return source;
 }
 
-function getAnimationEndName(dom) {
-	let cssAnimation = ["animation", "webkitAnimation"];
-	let animationEnd = {
-		"animation":"animationend",
-		"webkitAnimation":"webkitAnimationEnd"
-	};
-	for (let i = 0; i < cssAnimation.length; i++) {
-		if (dom.style[cssAnimation[i]] != undefined) {
-			return animationEnd[cssAnimation[i]];
-		}
-	}
-	return undefined;
-}
 function getFontSize() {
 	let clientWidth = document.documentElement.clientWidth;
-	if (clientWidth < 640)
+	if (clientWidth < 640) {
 		return 16 * (clientWidth / 375) + "px";
-	else
+	} else {
 		return 16;
+	}
 }
 
 const layer = {
@@ -228,7 +218,7 @@ const mcxDialog = {
 		addClass(loadingBg, "mobile-loading-bg");
 		addClass(loading, "mobile-loading");
 		addClass(loading, "animation-zoom-in");
-		//img.src = opts.src + "/loading.gif";
+		// img.src = opts.src + "/loading.gif";
 		img.src = require("./img/loading.gif");
 		loading.appendChild(img);
 		

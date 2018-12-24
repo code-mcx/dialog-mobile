@@ -3,14 +3,28 @@
  * Copyright (C) 2018 mcx
  * https://github.com/code-mcx/mcx-dialog-mobile
  */
-import "./css/dialog-mobile.css";
+import './css/dialog-mobile.css';
+
+function getAnimationEndName(dom) {
+  var cssAnimation = ["animation", "webkitAnimation"];
+  var animationEnd = {
+    "animation": "animationend",
+    "webkitAnimation": "webkitAnimationEnd"
+  };
+  for (var i = 0; i < cssAnimation.length; i++) {
+    if (dom.style[cssAnimation[i]] != undefined) {
+      return animationEnd[cssAnimation[i]];
+    }
+  }
+  return undefined;
+}
 
 function addClass(e, c) {
 	var newclass = e.className.split(" ");
 	if (e.className === "") newclass = [];
 	newclass.push(c);
 	e.className = newclass.join(" ");
-};
+}
 
 function extend(source, target) {
 	for (var key in target) {
@@ -19,27 +33,17 @@ function extend(source, target) {
 	return source;
 }
 
-function getAnimationEndName(dom) {
-	var cssAnimation = ["animation", "webkitAnimation"];
-	var animationEnd = {
-		"animation": "animationend",
-		"webkitAnimation": "webkitAnimationEnd"
-	};
-	for (var i = 0; i < cssAnimation.length; i++) {
-		if (dom.style[cssAnimation[i]] != undefined) {
-			return animationEnd[cssAnimation[i]];
-		}
-	}
-	return undefined;
-}
 function getFontSize() {
 	var clientWidth = document.documentElement.clientWidth;
-	if (clientWidth < 640) return 16 * (clientWidth / 375) + "px";else return 16;
+	if (clientWidth < 640) {
+		return 16 * (clientWidth / 375) + "px";
+	} else {
+		return 16;
+	}
 }
 
 var layer = {
 	initOpen: function initOpen(dom, options) {
-
 		dom.style.fontSize = getFontSize();
 
 		var body = document.querySelector("body");

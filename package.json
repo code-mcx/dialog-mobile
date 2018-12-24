@@ -10,12 +10,15 @@
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.9",
     "file-loader": "^1.1.6",
+    "rollup": "^0.68.1",
+    "rollup-plugin-babel": "^3.0.7",
+    "rollup-plugin-uglify": "^6.0.0",
     "style-loader": "^0.20.1",
     "webpack": "^3.10.0"
   },
   "scripts": {
     "dev": "webpack --config webpack.conf.js",
-    "build": "babel ./src --out-dir ./dist --ignore main.js"
+    "build": "node scripts/build"
   },
   "repository": {
     "type": "git",
