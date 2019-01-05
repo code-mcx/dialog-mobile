@@ -5,7 +5,7 @@
 		<title>mcx-dialog移动端弹框</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"/>
 		<link rel="stylesheet" type="text/css" href="dist/css/dialog-mobile.css"/>
-		<script type="text/javascript" src="dist/mcx-dialog.min.js"></script>
+		<script src="static/bundle.js" type="text/javascript"></script>
 		<style>
 			body {
 				font-family: arial;
@@ -24,14 +24,16 @@
 	<body>
 		<h5>alert</h5>
 		<p>
-			<button id="button-alert">alert</button>
+			<button id="button-alert">alert</button><br/><br/>
+			<button id="button-alert-with-title">带有标题、可配置文本alert</button>
 		</p>
 		
 		<h5>confirm</h5>
 		<p>
 			<button id="button-confirm">默认行为的confirm</button><br/><br/>
 			<button id="button-confirm-click">确定按钮点击回调的confirm</button><br/><br/>
-			<button id="button-confirm-text">自定义确定按钮文字的confirm</button>
+			<button id="button-confirm-text">自定义确定按钮文字的confirm</button><br/><br/>
+			<button id="button-confirm-title">自定义标题文字、按钮的confirm</button><br/><br/>
 		</p>
 		
 		<h5>bottom dialog</h5>
@@ -39,7 +41,8 @@
 			<button id="button-b-dialog">默认行为的bottom dialog</button><br/><br/>
 			<button id="button-b-dialog-btn">自定义按钮的bottom dialog</button><br/><br/>
 			<button id="button-b-dialog-style">自定义按钮文字颜色的bottom dialog</button><br/><br/>
-			<button id="button-b-dialog-click">按钮点击回调的bottom dialog</button>
+			<button id="button-b-dialog-click">按钮点击回调的bottom dialog</button><br/><br/>
+			<button id="button-b-dialog-title">带有标题的bottom dialog</button>
 		</p>
 		
 		<h5>toast</h5>
@@ -61,6 +64,11 @@
 		document.getElementById("button-alert").onclick = function(){
 			mcxDialog.alert("我是内容我是内容我是内容");
 		};
+
+		//带有标题、可配置文本alert
+		document.getElementById("button-alert-with-title").onclick = function(){
+			mcxDialog.alert("我是内容我是内容我是内容", { titleText: '标题', sureBtnText: "好的，我知道了", });
+		};
 		
 		//confirm
 		
@@ -77,6 +85,13 @@
 				sureBtnClick: function(){
 					alert("你点击了确定");
 				}
+			});
+		};
+		document.getElementById("button-confirm-title").onclick = function(){
+			mcxDialog.confirm("点击确定试一下", {
+				titleText: '我是标题',
+				sureBtnText: "好的",
+				cancelBtnText: "不用了",
 			});
 		};
 		document.getElementById("button-confirm-text").onclick = function(){
@@ -119,6 +134,9 @@
 					alert("你点击了" + btn[index - 1]);
 				}
 			});
+		};
+		document.getElementById("button-b-dialog-title").onclick = function(){
+			mcxDialog.showBottom({ title: '是否删除？', });
 		};
 		
 		//toast

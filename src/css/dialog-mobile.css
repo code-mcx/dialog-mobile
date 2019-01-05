@@ -28,6 +28,16 @@
 	border-radius: 5px 5px 0 0;
 	position: relative;
 }
+.dialog-mobile .dialog-title {
+	padding: 0.8em 1em 0.5em;
+	text-align: center;
+	color: #333333;
+	font-weight: bold;
+	border-radius: 5px 5px 0 0;
+}
+.dialog-mobile .dialog-title + .dialog-content  {
+	padding: 1.5em 1em 2em;
+}
 .dialog-mobile .dialog-content:after
 {
 	content: "";
@@ -87,6 +97,13 @@
 	width: 100%;
 	color: #333333;
 	background-color: #EEEEEE;
+}
+.dialog-mobile-bottom .bottom-btn-tile {
+	background: #FFFFFF;
+	padding: 0.5em 0;
+	text-align: center;
+	margin-bottom: 0.1em;
+	font-weight: bold;
 }
 .dialog-mobile-bottom .bottom-btn-item {
 	text-align: center;
