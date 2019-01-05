@@ -92,25 +92,34 @@ const layer = {
 };
 
 const mcxDialog = {
-  alert(content) {
+  alert(content, options) {
+    let opts = {
+      titleText: '',
+      sureBtnText: "确定",
+    };
+    opts = extend(opts, options);
     let btn = document.createElement("div");
-    btn.innerText = "确定";
+    let title = document.createElement("div");
+    btn.innerText = opts.sureBtnText;
+    title.innerText = opts.titleText;
     addClass(btn, "dialog-button");
+    addClass(title, "dialog-title");
 
-    let opts = {};
     opts.btns = [btn];
 
     this.open(content, opts);
   },
   confirm(content, options) {
     let opts = {
+      titleText: '',
       sureBtnText: "确定",
-      sureBtnClick: function() { }
+      cancelBtnText: "取消",
+      sureBtnClick: function() { },
     };
     opts = extend(opts, options);
 
     let cancelBtn = document.createElement("div");
-    cancelBtn.innerText = "取消";
+    cancelBtn.innerText = opts.cancelBtnText;
     addClass(cancelBtn, "dialog-cancel-button");
 
     let sureBtn = document.createElement("div");
@@ -123,13 +132,18 @@ const mcxDialog = {
   open(content, options) {
     let dialog = document.createElement("div");
     let dialogContent = document.createElement("div");
+    let dialogTitle = document.createElement("div");
 
     addClass(dialog, "dialog-mobile");
     addClass(dialog, "animation-zoom-in");
     addClass(dialogContent, "dialog-content");
+    addClass(dialogTitle, "dialog-title");
 
     dialogContent.innerText = content;
-
+    dialogTitle.innerText = options.titleText;
+    if (options.titleText) {
+      dialog.appendChild(dialogTitle);
+    }
     dialog.appendChild(dialogContent);
 
     options.btns.forEach((btn, i) => {
@@ -141,6 +155,7 @@ const mcxDialog = {
   },
   showBottom(options) {
     let opts = {
+      title: '',
       btn: ["删除"],
       btnColor: [],
       btnClick: function(index) { }
@@ -152,14 +167,19 @@ const mcxDialog = {
     }
 
     let bottomDialog = document.createElement("div");
+    let title = document.createElement("div");
     let dialogItem = document.createElement("div");
     let cancelBtn = document.createElement("div");
+    title.innerText = opts.title;
     cancelBtn.innerText = "取消";
     addClass(bottomDialog, "dialog-mobile-bottom");
     addClass(bottomDialog, "animation-bottom-in");
+    addClass(title, "bottom-btn-tile");
     addClass(dialogItem, "bottom-btn-item");
     addClass(cancelBtn, "dialog-cancel-btn");
-
+    if (opts.title) {
+      bottomDialog.appendChild(title);
+    }
     bottomDialog.appendChild(dialogItem);
     bottomDialog.appendChild(cancelBtn);
 
