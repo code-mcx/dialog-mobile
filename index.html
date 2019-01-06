@@ -67,7 +67,7 @@
 
 		//带有标题、可配置文本alert
 		document.getElementById("button-alert-with-title").onclick = function(){
-			mcxDialog.alert("我是内容我是内容我是内容", { titleText: '标题', sureBtnText: "好的，我知道了", });
+			mcxDialog.alert("我是内容我是内容我是内容", { titleText: "标题", sureBtnText: "好的，我知道了", });
 		};
 		
 		//confirm
@@ -89,7 +89,7 @@
 		};
 		document.getElementById("button-confirm-title").onclick = function(){
 			mcxDialog.confirm("点击确定试一下", {
-				titleText: '我是标题',
+				titleText: "我是标题",
 				sureBtnText: "好的",
 				cancelBtnText: "不用了",
 			});
@@ -136,7 +136,7 @@
 			});
 		};
 		document.getElementById("button-b-dialog-title").onclick = function(){
-			mcxDialog.showBottom({ title: '是否删除？', });
+			mcxDialog.showBottom({ title: "是否删除？" });
 		};
 		
 		//toast

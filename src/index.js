@@ -94,7 +94,7 @@ const layer = {
 const mcxDialog = {
   alert(content, options) {
     let opts = {
-      titleText: '',
+      titleText: "",
       sureBtnText: "确定",
     };
     opts = extend(opts, options);
@@ -111,7 +111,7 @@ const mcxDialog = {
   },
   confirm(content, options) {
     let opts = {
-      titleText: '',
+      titleText: "",
       sureBtnText: "确定",
       cancelBtnText: "取消",
       sureBtnClick: function() { },
@@ -155,7 +155,7 @@ const mcxDialog = {
   },
   showBottom(options) {
     let opts = {
-      title: '',
+      title: "",
       btn: ["删除"],
       btnColor: [],
       btnClick: function(index) { }
@@ -174,7 +174,7 @@ const mcxDialog = {
     cancelBtn.innerText = "取消";
     addClass(bottomDialog, "dialog-mobile-bottom");
     addClass(bottomDialog, "animation-bottom-in");
-    addClass(title, "bottom-btn-tile");
+    addClass(title, "bottom-btn-title");
     addClass(dialogItem, "bottom-btn-item");
     addClass(cancelBtn, "dialog-cancel-btn");
     if (opts.title) {
