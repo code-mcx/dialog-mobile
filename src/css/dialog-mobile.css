@@ -26,6 +26,7 @@
 	text-align: center;
 	color: #333333;
 	border-radius: 5px 5px 0 0;
+	word-break: break-word;
 	position: relative;
 }
 .dialog-mobile .dialog-title {

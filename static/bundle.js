@@ -178,25 +178,31 @@ var layer = {
 };
 
 var mcxDialog = {
-  alert: function alert(content) {
+  alert: function alert(content, options) {
+    var opts = {
+      titleText: "",
+      sureBtnText: "确定"
+    };
+    opts = extend(opts, options);
     var btn = document.createElement("div");
-    btn.innerText = "确定";
+    btn.innerText = opts.sureBtnText;
     addClass(btn, "dialog-button");
 
-    var opts = {};
     opts.btns = [btn];
 
     this.open(content, opts);
   },
   confirm: function confirm(content, options) {
     var opts = {
+      titleText: "",
+      cancelBtnText: "取消",
       sureBtnText: "确定",
       sureBtnClick: function sureBtnClick() {}
     };
     opts = extend(opts, options);
 
     var cancelBtn = document.createElement("div");
-    cancelBtn.innerText = "取消";
+    cancelBtn.innerText = opts.cancelBtnText;
     addClass(cancelBtn, "dialog-cancel-button");
 
     var sureBtn = document.createElement("div");
@@ -216,6 +222,13 @@ var mcxDialog = {
 
     dialogContent.innerText = content;
 
+    if (options.titleText) {
+      var dialogTitle = document.createElement("div");
+      addClass(dialogTitle, "dialog-title");
+      dialogTitle.innerText = options.titleText;
+      dialog.appendChild(dialogTitle);
+    }
+
     dialog.appendChild(dialogContent);
 
     options.btns.forEach(function (btn, i) {
@@ -227,6 +240,8 @@ var mcxDialog = {
   },
   showBottom: function showBottom(options) {
     var opts = {
+      title: "",
+      cancelText: "取消",
       btn: ["删除"],
       btnColor: [],
       btnClick: function btnClick(index) {}
@@ -238,14 +253,19 @@ var mcxDialog = {
     }
 
     var bottomDialog = document.createElement("div");
+    var title = document.createElement("div");
     var dialogItem = document.createElement("div");
     var cancelBtn = document.createElement("div");
-    cancelBtn.innerText = "取消";
+    title.innerText = opts.title;
+    cancelBtn.innerText = opts.cancelText;
     addClass(bottomDialog, "dialog-mobile-bottom");
     addClass(bottomDialog, "animation-bottom-in");
+    addClass(title, "bottom-btn-title");
     addClass(dialogItem, "bottom-btn-item");
     addClass(cancelBtn, "dialog-cancel-btn");
-
+    if (opts.title) {
+      bottomDialog.appendChild(title);
+    }
     bottomDialog.appendChild(dialogItem);
     bottomDialog.appendChild(cancelBtn);
 
@@ -420,7 +440,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, ".dialog-mobile-bg {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10000;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tbackground-color: rgba(0, 0, 0, 0.7);\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n/*alert confirm*/\r\n.dialog-mobile {\r\n\tposition: fixed;\r\n\ttop: 50%;\r\n\tleft: 0;\r\n\tz-index: 10001;\r\n\twidth: 20em;\r\n\tborder-radius: 5px;\r\n\tbackground-color: #FFFFFF;\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n.dialog-mobile .dialog-content {\r\n\tpadding: 2.5em 1em;\r\n\ttext-align: center;\r\n\tcolor: #333333;\r\n\tborder-radius: 5px 5px 0 0;\r\n\tposition: relative;\r\n}\r\n.dialog-mobile .dialog-content:after\r\n{\r\n\tcontent: \"\";\r\n\tposition: absolute;\r\n\tz-index: 10002;\r\n\tbottom: 0;\r\n\tleft: 0;\r\n\twidth: 100%;\r\n\theight: 1px;\r\n\tbackground-color: #CCCCCC;\r\n\t-webkit-transform: scaleY(.5);\r\n\ttransform: scaleY(.5);\r\n}\r\n.dialog-mobile .dialog-button {\r\n\theight: 3em;\r\n\tline-height: 3em;\r\n\ttext-align: center;\r\n\tborder-radius: 0 0 5px 5px;\r\n\tcolor: #000000;\r\n\tbackground: #EEEEEE;\r\n}\r\n.dialog-mobile .dialog-sure-button,\r\n.dialog-mobile .dialog-cancel-button {\r\n\tfloat: left;\r\n\theight: 3em;\r\n\twidth: 50%;\r\n\tline-height: 3em;\r\n\ttext-align: center;\r\n\tbackground: #EEEEEE;\r\n}\r\n.dialog-mobile .dialog-sure-button {\r\n\tcolor: #1C86EE;\r\n\tborder-radius: 0 0 5px 0;\r\n\tposition: relative;\r\n}\r\n.dialog-mobile .dialog-sure-button:after {\r\n\tcontent: \"\";\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\twidth: 1px;\r\n\theight: 100%;\r\n\tbackground-color: #CCCCCC;\r\n\t-webkit-transform: scaleX(.5);\r\n\ttransform: scaleX(.5);\r\n}\r\n.dialog-mobile .dialog-cancel-button {\r\n\tcolor: #000000;\r\n\tborder-radius: 0 0 0 5px;\r\n}\r\n/*bottom dialog*/\r\n.dialog-mobile-bottom {\r\n\tposition: fixed;\r\n\tleft: 0;\r\n\tbottom: 0;\r\n\tz-index: 10001;\r\n\twidth: 100%;\r\n\tcolor: #333333;\r\n\tbackground-color: #EEEEEE;\r\n}\r\n.dialog-mobile-bottom .bottom-btn-item {\r\n\ttext-align: center;\r\n}\r\n.bottom-btn-item .dialog-item-btn {\r\n\tbackground: #FFFFFF;\r\n\tpadding: 0.5em 0;\r\n\tborder-bottom: 1px solid #EEEEEE;\r\n}\r\n.bottom-btn-item .dialog-item-btn:last-child {\r\n\tborder-bottom: none;\r\n}\r\n.dialog-mobile-bottom .dialog-cancel-btn {\r\n\tmargin-top: 0.6em;\r\n\ttext-align: center;\r\n\tbackground: #FFFFFF;\r\n\tpadding: 0.5em 0;\r\n}\r\n/*toast*/\r\n.dialog-mobile-toast {\r\n\tposition: fixed;\r\n\tbottom: 5em;\r\n}\r\n.dialog-mobile-toast .toast-content {\r\n\tpadding: 0.5em 1em;\r\n\tcolor: #FFFFFF;\r\n\tborder-radius: 2px;\r\n\tbackground-color: #333333;\r\n}\r\n/*loading*/\r\n.mobile-loading-bg {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10000;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tbackground-color: rgba(0, 0, 0, 0.3);\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n.mobile-loading {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10001;\r\n\tmin-width: 2em;\r\n\tmin-height: 2em;\r\n\tpadding: 0.8em 1.6em;\r\n\ttext-align: center;\r\n\tborder-radius: 2px;\r\n\tcolor: #FFFFF0;\r\n\tbackground-color: #0A0A0A;\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n/*animation*/\r\n.animation-zoom-in, .animation-zoom-out,\r\n.animation-bottom-in, .animation-bottom-out,\r\n.animation-bg-fadeIn {\r\n\t-webkit-animation-duration: 0.3s;\r\n\t-webkit-animation-fill-mode: both;\r\n\tanimation-duration: 0.3s;\r\n\tanimation-fill-mode: both;\r\n}\r\n.animation-fade-in, .animation-fade-out {\r\n\t-webkit-animation-duration: 1s;\r\n\t-webkit-animation-timing-function: ease-out;\r\n\t-webkit-animation-fill-mode: both;\r\n\tanimation-duration: 1s;\r\n\tanimation-timing-function: ease-out;\r\n\tanimation-fill-mode: both;\r\n}\r\n.animation-zoom-in {\r\n\t-webkit-animation-name: zoomIn;\r\n\tanimation-name: zoomIn;\r\n}\r\n.animation-zoom-out {\r\n\t-webkit-animation-name: zoomOut;\r\n\tanimation-name: zoomOut;\r\n}\r\n.animation-fade-in {\r\n\t-webkit-animation-name: fadeIn;\r\n\tanimation-name: fadeIn;\r\n}\r\n.animation-fade-out {\r\n\t-webkit-animation-name: fadeOut;\r\n\tanimation-name: fadeOut;\r\n}\r\n.animation-bottom-in {\r\n\t-webkit-animation-name: bottomIn;\r\n\tanimation-name: bottomIn;\r\n}\r\n.animation-bottom-out {\r\n\t-webkit-animation-name: bottomOut;\r\n\tanimation-name: bottomOut;\r\n}\r\n.animation-bg-fadeIn {\r\n\t-webkit-animation-name: fadeIn;\r\n\tanimation-name: fadeIn;\r\n}\r\n\r\n@-webkit-keyframes zoomIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t\t-webkit-transform: scale(0, 0);\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t\t-webkit-transform: scale(1, 1);\r\n\t}\r\n}\r\n@-webkit-keyframes zoomOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t\t-webkit-transform: scale(1, 1);\r\n\t}\r\n\t90%{\r\n\t\t-webkit-transform: scale(0.3, 0.3);\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t\t-webkit-transform: scale(0, 0);\r\n\t}\r\n}\r\n@keyframes zoomIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t\ttransform: scale(0, 0);\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t\ttransform: scale(1, 1);\r\n\t}\r\n}\r\n@keyframes zoomOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t\ttransform: scale(1, 1);\r\n\t}\r\n\t90%{\r\n\t\ttransform: scale(0.3, 0.3);\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t\ttransform: scale(0, 0);\r\n\t}\r\n}\r\n@-webkit-keyframes fadeIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t}\r\n}\r\n@-webkit-keyframes fadeOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t}\r\n\t30%{\r\n\t\topacity: 0.3;\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t}\r\n}\r\n@keyframes fadeIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t}\r\n}\r\n@keyframes fadeOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t}\r\n\t30%{\r\n\t\topacity: 0.3;\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t}\r\n}\r\n@-webkit-keyframes bottomIn {\r\n\tfrom{\r\n\t\tbottom: -1000px;\r\n\t}\r\n\tto{\r\n\t\tbottom: 0;\r\n\t}\r\n}\r\n@-webkit-keyframes bottomOut {\r\n\tfrom{\r\n\t\tbottom: 0;\r\n\t}\r\n\tto{\r\n\t\tbottom: -1000px;\r\n\t}\r\n}\r\n@keyframes bottomIn {\r\n\tfrom{\r\n\t\tbottom: -1000px;\r\n\t}\r\n\tto{\r\n\t\tbottom: 0;\r\n\t}\r\n}\r\n@keyframes bottomOut {\r\n\tfrom{\r\n\t\tbottom: 0;\r\n\t}\r\n\tto{\r\n\t\tbottom: -1000px;\r\n\t}\r\n}", ""]);
+exports.push([module.i, ".dialog-mobile-bg {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10000;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tbackground-color: rgba(0, 0, 0, 0.7);\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n/*alert confirm*/\r\n.dialog-mobile {\r\n\tposition: fixed;\r\n\ttop: 50%;\r\n\tleft: 0;\r\n\tz-index: 10001;\r\n\twidth: 20em;\r\n\tborder-radius: 5px;\r\n\tbackground-color: #FFFFFF;\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n.dialog-mobile .dialog-content {\r\n\tpadding: 2.5em 1em;\r\n\ttext-align: center;\r\n\tcolor: #333333;\r\n\tborder-radius: 5px 5px 0 0;\r\n\tword-break: break-word;\r\n\tposition: relative;\r\n}\r\n.dialog-mobile .dialog-title {\r\n\tpadding: 0.8em 1em 0.5em;\r\n\ttext-align: center;\r\n\tcolor: #333333;\r\n\tfont-weight: bold;\r\n\tborder-radius: 5px 5px 0 0;\r\n}\r\n.dialog-mobile .dialog-title + .dialog-content  {\r\n\tpadding: 1.5em 1em 2em;\r\n}\r\n.dialog-mobile .dialog-content:after\r\n{\r\n\tcontent: \"\";\r\n\tposition: absolute;\r\n\tz-index: 10002;\r\n\tbottom: 0;\r\n\tleft: 0;\r\n\twidth: 100%;\r\n\theight: 1px;\r\n\tbackground-color: #CCCCCC;\r\n\t-webkit-transform: scaleY(.5);\r\n\ttransform: scaleY(.5);\r\n}\r\n.dialog-mobile .dialog-button {\r\n\theight: 3em;\r\n\tline-height: 3em;\r\n\ttext-align: center;\r\n\tborder-radius: 0 0 5px 5px;\r\n\tcolor: #000000;\r\n\tbackground: #EEEEEE;\r\n}\r\n.dialog-mobile .dialog-sure-button,\r\n.dialog-mobile .dialog-cancel-button {\r\n\tfloat: left;\r\n\theight: 3em;\r\n\twidth: 50%;\r\n\tline-height: 3em;\r\n\ttext-align: center;\r\n\tbackground: #EEEEEE;\r\n}\r\n.dialog-mobile .dialog-sure-button {\r\n\tcolor: #1C86EE;\r\n\tborder-radius: 0 0 5px 0;\r\n\tposition: relative;\r\n}\r\n.dialog-mobile .dialog-sure-button:after {\r\n\tcontent: \"\";\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\twidth: 1px;\r\n\theight: 100%;\r\n\tbackground-color: #CCCCCC;\r\n\t-webkit-transform: scaleX(.5);\r\n\ttransform: scaleX(.5);\r\n}\r\n.dialog-mobile .dialog-cancel-button {\r\n\tcolor: #000000;\r\n\tborder-radius: 0 0 0 5px;\r\n}\r\n/*bottom dialog*/\r\n.dialog-mobile-bottom {\r\n\tposition: fixed;\r\n\tleft: 0;\r\n\tbottom: 0;\r\n\tz-index: 10001;\r\n\twidth: 100%;\r\n\tcolor: #333333;\r\n\tbackground-color: #EEEEEE;\r\n}\r\n.dialog-mobile-bottom .bottom-btn-title {\r\n\tbackground: #FFFFFF;\r\n\tpadding: 0.5em 0;\r\n\ttext-align: center;\r\n\tmargin-bottom: 0.1em;\r\n\tfont-weight: bold;\r\n}\r\n.dialog-mobile-bottom .bottom-btn-item {\r\n\ttext-align: center;\r\n}\r\n.bottom-btn-item .dialog-item-btn {\r\n\tbackground: #FFFFFF;\r\n\tpadding: 0.5em 0;\r\n\tborder-bottom: 1px solid #EEEEEE;\r\n}\r\n.bottom-btn-item .dialog-item-btn:last-child {\r\n\tborder-bottom: none;\r\n}\r\n.dialog-mobile-bottom .dialog-cancel-btn {\r\n\tmargin-top: 0.6em;\r\n\ttext-align: center;\r\n\tbackground: #FFFFFF;\r\n\tpadding: 0.5em 0;\r\n}\r\n/*toast*/\r\n.dialog-mobile-toast {\r\n\tposition: fixed;\r\n\tbottom: 5em;\r\n}\r\n.dialog-mobile-toast .toast-content {\r\n\tpadding: 0.5em 1em;\r\n\tcolor: #FFFFFF;\r\n\tborder-radius: 2px;\r\n\tbackground-color: #333333;\r\n}\r\n/*loading*/\r\n.mobile-loading-bg {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10000;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tbackground-color: rgba(0, 0, 0, 0.3);\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n.mobile-loading {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: 10001;\r\n\tmin-width: 2em;\r\n\tmin-height: 2em;\r\n\tpadding: 0.8em 1.6em;\r\n\ttext-align: center;\r\n\tborder-radius: 2px;\r\n\tcolor: #FFFFF0;\r\n\tbackground-color: #0A0A0A;\r\n\t-webkit-transform: translate3d(0, 0, 0);\r\n\ttransform: translate3d(0, 0, 0);\r\n}\r\n/*animation*/\r\n.animation-zoom-in, .animation-zoom-out,\r\n.animation-bottom-in, .animation-bottom-out,\r\n.animation-bg-fadeIn {\r\n\t-webkit-animation-duration: 0.3s;\r\n\t-webkit-animation-fill-mode: both;\r\n\tanimation-duration: 0.3s;\r\n\tanimation-fill-mode: both;\r\n}\r\n.animation-fade-in, .animation-fade-out {\r\n\t-webkit-animation-duration: 1s;\r\n\t-webkit-animation-timing-function: ease-out;\r\n\t-webkit-animation-fill-mode: both;\r\n\tanimation-duration: 1s;\r\n\tanimation-timing-function: ease-out;\r\n\tanimation-fill-mode: both;\r\n}\r\n.animation-zoom-in {\r\n\t-webkit-animation-name: zoomIn;\r\n\tanimation-name: zoomIn;\r\n}\r\n.animation-zoom-out {\r\n\t-webkit-animation-name: zoomOut;\r\n\tanimation-name: zoomOut;\r\n}\r\n.animation-fade-in {\r\n\t-webkit-animation-name: fadeIn;\r\n\tanimation-name: fadeIn;\r\n}\r\n.animation-fade-out {\r\n\t-webkit-animation-name: fadeOut;\r\n\tanimation-name: fadeOut;\r\n}\r\n.animation-bottom-in {\r\n\t-webkit-animation-name: bottomIn;\r\n\tanimation-name: bottomIn;\r\n}\r\n.animation-bottom-out {\r\n\t-webkit-animation-name: bottomOut;\r\n\tanimation-name: bottomOut;\r\n}\r\n.animation-bg-fadeIn {\r\n\t-webkit-animation-name: fadeIn;\r\n\tanimation-name: fadeIn;\r\n}\r\n\r\n@-webkit-keyframes zoomIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t\t-webkit-transform: scale(0, 0);\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t\t-webkit-transform: scale(1, 1);\r\n\t}\r\n}\r\n@-webkit-keyframes zoomOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t\t-webkit-transform: scale(1, 1);\r\n\t}\r\n\t90%{\r\n\t\t-webkit-transform: scale(0.3, 0.3);\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t\t-webkit-transform: scale(0, 0);\r\n\t}\r\n}\r\n@keyframes zoomIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t\ttransform: scale(0, 0);\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t\ttransform: scale(1, 1);\r\n\t}\r\n}\r\n@keyframes zoomOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t\ttransform: scale(1, 1);\r\n\t}\r\n\t90%{\r\n\t\ttransform: scale(0.3, 0.3);\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t\ttransform: scale(0, 0);\r\n\t}\r\n}\r\n@-webkit-keyframes fadeIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t}\r\n}\r\n@-webkit-keyframes fadeOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t}\r\n\t30%{\r\n\t\topacity: 0.3;\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t}\r\n}\r\n@keyframes fadeIn {\r\n\tfrom{\r\n\t\topacity: 0;\r\n\t}\r\n\tto{\r\n\t\topacity: 1;\r\n\t}\r\n}\r\n@keyframes fadeOut {\r\n\tfrom{\r\n\t\topacity: 1;\r\n\t}\r\n\t30%{\r\n\t\topacity: 0.3;\r\n\t}\r\n\tto{\r\n\t\topacity: 0;\r\n\t}\r\n}\r\n@-webkit-keyframes bottomIn {\r\n\tfrom{\r\n\t\tbottom: -1000px;\r\n\t}\r\n\tto{\r\n\t\tbottom: 0;\r\n\t}\r\n}\r\n@-webkit-keyframes bottomOut {\r\n\tfrom{\r\n\t\tbottom: 0;\r\n\t}\r\n\tto{\r\n\t\tbottom: -1000px;\r\n\t}\r\n}\r\n@keyframes bottomIn {\r\n\tfrom{\r\n\t\tbottom: -1000px;\r\n\t}\r\n\tto{\r\n\t\tbottom: 0;\r\n\t}\r\n}\r\n@keyframes bottomOut {\r\n\tfrom{\r\n\t\tbottom: 0;\r\n\t}\r\n\tto{\r\n\t\tbottom: -1000px;\r\n\t}\r\n}", ""]);
 
 // exports
 

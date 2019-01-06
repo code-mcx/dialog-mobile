@@ -4,8 +4,8 @@
 		<meta charset="UTF-8">
 		<title>mcx-dialog移动端弹框</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"/>
-		<link rel="stylesheet" type="text/css" href="dist/css/dialog-mobile.css"/>
-		<script type="text/javascript" src="dist/mcx-dialog.min.js"></script>
+		<!-- <link rel="stylesheet" type="text/css" href="dist/css/dialog-mobile.css"/> -->
+		<script type="text/javascript" src="static/bundle.js"></script>
 		<style>
 			body {
 				font-family: arial;
@@ -42,7 +42,8 @@
 			<button id="button-b-dialog-btn">自定义按钮的bottom dialog</button><br/><br/>
 			<button id="button-b-dialog-style">自定义按钮文字颜色的bottom dialog</button><br/><br/>
 			<button id="button-b-dialog-click">按钮点击回调的bottom dialog</button><br/><br/>
-			<button id="button-b-dialog-title">带有标题的bottom dialog</button>
+			<button id="button-b-dialog-title">带有标题的bottom dialog</button><br/><br/>
+			<button id="button-b-dialog-cancel">自定义取消按钮文字的bottom dialog</button>
 		</p>
 		
 		<h5>toast</h5>
@@ -61,18 +62,27 @@
 	<script type="text/javascript">
 	
 		//alert
+
+		//可设置参数
+		//titleText: "",  //标题文字
+		//sureBtnText: "确定",  //确认按钮文字
 		document.getElementById("button-alert").onclick = function(){
 			mcxDialog.alert("我是内容我是内容我是内容");
 		};
 
 		//带有标题、可配置文本alert
 		document.getElementById("button-alert-with-title").onclick = function(){
-			mcxDialog.alert("我是内容我是内容我是内容", { titleText: "标题", sureBtnText: "好的，我知道了", });
+			mcxDialog.alert("我是内容我是内容我是内容", {
+				titleText: "标题",
+				sureBtnText: "好的，我知道了"
+			});
 		};
 		
 		//confirm
 		
 		//可设置参数
+		//titleText: "",  //标题文字
+		//cancelBtnText: "取消", //取消按钮文字
 		//sureBtnText: "确定",  //确认按钮文字
 		//确认按钮点击回调
 		//sureBtnClick: function(){} 
@@ -88,10 +98,10 @@
 			});
 		};
 		document.getElementById("button-confirm-title").onclick = function(){
-			mcxDialog.confirm("点击确定试一下", {
+			mcxDialog.confirm("你需要买一本书吗？", {
 				titleText: "我是标题",
 				sureBtnText: "好的",
-				cancelBtnText: "不用了",
+				cancelBtnText: "不用了"
 			});
 		};
 		document.getElementById("button-confirm-text").onclick = function(){
@@ -106,6 +116,8 @@
 		//bottom dialog
 		
 		//可设置参数
+		//title: "", //标题
+		//cancelText: "取消", //取消按钮文字
 		//btn: ["打开相机", "打开图库"],  //按钮文字
 		//btnColor: ["#333333", "#333333"],  //按钮文字颜色
 		//按钮点击回调函数，index从1开始。注意取消按钮不回调此函数
@@ -137,6 +149,9 @@
 		};
 		document.getElementById("button-b-dialog-title").onclick = function(){
 			mcxDialog.showBottom({ title: "是否删除？" });
+		};
+		document.getElementById("button-b-dialog-cancel").onclick = function(){
+			mcxDialog.showBottom({ cancelText: "关闭" });
 		};
 		
 		//toast
