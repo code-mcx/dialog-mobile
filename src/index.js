@@ -58,7 +58,7 @@ const layer = {
       }
     }
 
-    //set button click event
+    // set button click event
     options.btns.forEach((btn, i) => {
       if (i != 0 && i <= options.btns.length - 1) {
         if (!options.bottom) {
@@ -78,7 +78,7 @@ const layer = {
     });
 
     if (!options.bottom) {
-      //set position
+      // set position
       dom.style.top = (document.documentElement.clientHeight - dom.offsetHeight) / 2 + "px";
       dom.style.left = (document.documentElement.clientWidth - dom.offsetWidth) / 2 + "px";
     }

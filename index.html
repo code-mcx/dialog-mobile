@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>mcx-dialog移动端弹框</title>
+		<title>mcx-dialog (Mobile side dialog box)</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"/>
 		<!-- <link rel="stylesheet" type="text/css" href="dist/css/dialog-mobile.css"/> -->
 		<script type="text/javascript" src="static/bundle.js"></script>
@@ -22,167 +22,173 @@
 		</style>
 	</head>
 	<body>
-		<h5>alert</h5>
+		<h5>Alert</h5>
 		<p>
-			<button id="button-alert">alert</button><br/><br/>
-			<button id="button-alert-with-title">带有标题、可配置文本alert</button>
+			<button id="button-alert">Alert</button><br/><br/>
+			<button id="button-alert-with-title">With title, configurable text alert</button>
 		</p>
 		
-		<h5>confirm</h5>
+		<h5>Confirm</h5>
 		<p>
-			<button id="button-confirm">默认行为的confirm</button><br/><br/>
-			<button id="button-confirm-click">确定按钮点击回调的confirm</button><br/><br/>
-			<button id="button-confirm-text">自定义确定按钮文字的confirm</button><br/><br/>
-			<button id="button-confirm-title">自定义标题文字、按钮的confirm</button><br/><br/>
+			<button id="button-confirm">Default behavior of the confirm</button><br/><br/>
+			<button id="button-confirm-click">Confirmation button callback</button><br/><br/>
+			<button id="button-confirm-text">Customize the confirm of the confirm button text</button><br/><br/>
+			<button id="button-confirm-title">Customize title text, button confirm</button><br/><br/>
 		</p>
 		
-		<h5>bottom dialog</h5>
+		<h5>Bottom Dialog</h5>
 		<p>
-			<button id="button-b-dialog">默认行为的bottom dialog</button><br/><br/>
-			<button id="button-b-dialog-btn">自定义按钮的bottom dialog</button><br/><br/>
-			<button id="button-b-dialog-style">自定义按钮文字颜色的bottom dialog</button><br/><br/>
-			<button id="button-b-dialog-click">按钮点击回调的bottom dialog</button><br/><br/>
-			<button id="button-b-dialog-title">带有标题的bottom dialog</button><br/><br/>
-			<button id="button-b-dialog-cancel">自定义取消按钮文字的bottom dialog</button>
+			<button id="button-b-dialog">Default behavior of the bottom dialog</button><br/><br/>
+			<button id="button-b-dialog-btn">Custom button bottom dialog</button><br/><br/>
+			<button id="button-b-dialog-style">Customize the bottom dialog of the button text color</button><br/><br/>
+			<button id="button-b-dialog-click">Button to click the callback's bottom dialog</button><br/><br/>
+			<button id="button-b-dialog-title">Bottom dialog with title</button><br/><br/>
+			<button id="button-b-dialog-cancel">Customize the bottom dialog of the cancel button text</button>
 		</p>
 		
-		<h5>toast</h5>
+		<h5>Toast</h5>
 		<p>
-			<button id="button-toast">默认行为的toast</button><br/><br/>
-			<button id="button-toast-time">指定消失时间的toast</button>
+			<button id="button-toast">Default behavior of the toast</button><br/><br/>
+			<button id="button-toast-time">Toast that specifies the time of disappearance</button>
 		</p>
 		
-		<h5>loading</h5>
+		<h5>Loading</h5>
 		<p>
-			<button id="button-loading">默认行为的loading</button><br/><br/>
-			<button id="button-loading-content">指定内容的loading</button><br/><br/>
-			<button id="button-loading-close">3秒后关闭的loading</button>
+			<button id="button-loading">Default behavior of the loading</button><br/><br/>
+			<button id="button-loading-content">Loading for the specified content</button><br/><br/>
+			<button id="button-loading-close">Closed loading after 3 seconds</button>
 		</p>
 	</body>
 	<script type="text/javascript">
 	
-		//alert
+		// Alert
 
-		//可设置参数
-		//titleText: "",  //标题文字
-		//sureBtnText: "确定",  //确认按钮文字
-		document.getElementById("button-alert").onclick = function(){
-			mcxDialog.alert("我是内容我是内容我是内容");
+		// Options
+		// titleText: "",  // Title text 
+		// sureBtnText: "确定",  //Confirmation button text
+		document.getElementById("button-alert").onclick = function() {
+			mcxDialog.alert("I'm the content, I'm the content, I'm the content");
 		};
 
-		//带有标题、可配置文本alert
-		document.getElementById("button-alert-with-title").onclick = function(){
-			mcxDialog.alert("我是内容我是内容我是内容", {
-				titleText: "标题",
-				sureBtnText: "好的，我知道了"
+		// With title, configurable text alert
+		document.getElementById("button-alert-with-title").onclick = function() {
+			mcxDialog.alert("I'm the content, I'm the content, I'm the content", {
+				titleText: "Title",
+				sureBtnText: "Okay, I got it"
 			});
 		};
 		
-		//confirm
+		// confirm
 		
-		//可设置参数
-		//titleText: "",  //标题文字
-		//cancelBtnText: "取消", //取消按钮文字
-		//sureBtnText: "确定",  //确认按钮文字
-		//确认按钮点击回调
-		//sureBtnClick: function(){} 
-		document.getElementById("button-confirm").onclick = function(){
-			mcxDialog.confirm("我是内容我是内容我是内容");
+		// Options
+		// titleText: "",  // Title text 
+		// cancelBtnText: "cancel", // Cancel button text
+		// sureBtnText: "yes",  // Confirmation button text
+		// Confirm button click callback
+		// sureBtnClick: function(){} 
+		document.getElementById("button-confirm").onclick = function() {
+			mcxDialog.confirm("I'm the content, I'm the content, I'm the content");
 		};
-		document.getElementById("button-confirm-click").onclick = function(){
-			mcxDialog.confirm("点击确定试一下", {
-				//确认按钮点击回调
-				sureBtnClick: function(){
-					alert("你点击了确定");
+		document.getElementById("button-confirm-click").onclick = function() {
+			mcxDialog.confirm("Click OK and try", {
+				sureBtnText: "OK",
+				// Confirm button click callback
+				sureBtnClick: function() {
+					alert("You clicked on OK");
+				}
+			});
+		};
+		document.getElementById("button-confirm-text").onclick = function() {
+			mcxDialog.confirm("Do you want to be a fairy when you stay up so late?", {
+				sureBtnText: "Yes",  // Confirmation button text
+				sureBtnClick: function() {  // Confirm button click callback
+					alert("You have become a fairy...");
 				}
 			});
 		};
 		document.getElementById("button-confirm-title").onclick = function(){
-			mcxDialog.confirm("你需要买一本书吗？", {
-				titleText: "我是标题",
-				sureBtnText: "好的",
-				cancelBtnText: "不用了"
-			});
-		};
-		document.getElementById("button-confirm-text").onclick = function(){
-			mcxDialog.confirm("这么晚还不睡，你想成仙吗？", {
-				sureBtnText: "是的",  //确认按钮文字
-				sureBtnClick: function(){  //确认按钮点击回调
-					alert("你已成仙...");
-				}
+			mcxDialog.confirm("Do you need to buy a book?", {
+				titleText: "I'm the title",
+				sureBtnText: "Ok",
+				cancelBtnText: "No"
 			});
 		};
 		
-		//bottom dialog
+		// Bottom Dialog
 		
-		//可设置参数
-		//title: "", //标题
-		//cancelText: "取消", //取消按钮文字
-		//btn: ["打开相机", "打开图库"],  //按钮文字
-		//btnColor: ["#333333", "#333333"],  //按钮文字颜色
-		//按钮点击回调函数，index从1开始。注意取消按钮不回调此函数
-		//btnClick: function(index){}  
-		document.getElementById("button-b-dialog").onclick = function(){
+		// Options
+		// title: "", // title
+		// cancelText: "cancel", // Cancel button text
+		// btn: ["Turn on the camera", "Open the library"],  // button text
+		// btnColor: ["#333333", "#333333"],  // Button text color
+		// Button to click the callback function, index from 1.
+		// Note that the cancel button does not callback this function 
+		// btnClick: function(index){}  
+		document.getElementById("button-b-dialog").onclick = function() {
 			mcxDialog.showBottom();
 		};
-		document.getElementById("button-b-dialog-btn").onclick = function(){
+		document.getElementById("button-b-dialog-btn").onclick = function() {
 			mcxDialog.showBottom({
-				btn: ["打开相机", "打开图库"]  //设置按钮文字
+				btn: ["Turn on the camera", "Open the library"]  // Setting button text
 			});
 		};
-		document.getElementById("button-b-dialog-style").onclick = function(){
+		document.getElementById("button-b-dialog-style").onclick = function() {
 			mcxDialog.showBottom({
-				btn: ["打开相机", "打开图库"],  //设置按钮文字
-				btnColor: ["#000000", "#000000"]  //设置按钮文字颜色
+				btn: ["Turn on the camera", "Open the library"],  // Setting button text
+				btnColor: ["#000000", "#000000"]  // Setting button text color
 			});
 		};
-		document.getElementById("button-b-dialog-click").onclick = function(){
-			var btn = ["打开相机", "打开图库"];
+		document.getElementById("button-b-dialog-click").onclick = function() {
+			var btn = ["Turn on the camera", "Open the library"];
 			mcxDialog.showBottom({
-				btn: btn,  //设置按钮文字
-				btnColor: ["#000000", "#000000"],  //设置按钮文字颜色
-				//按钮点击回调函数，index从1开始。注意取消按钮不回调此函数
+				btn: btn,  // Setting button text
+				btnColor: ["#000000", "#000000"],  // Setting button text color
+				// Button to click the callback function, index from 1.
+				// Note that the cancel button does not callback this function 
 				btnClick: function(index){
-					alert("你点击了" + btn[index - 1]);
+					alert("You clicked" + btn[index - 1]);
 				}
 			});
 		};
-		document.getElementById("button-b-dialog-title").onclick = function(){
-			mcxDialog.showBottom({ title: "是否删除？" });
+		document.getElementById("button-b-dialog-title").onclick = function() {
+			mcxDialog.showBottom({ title: "Is it deleted?" });
 		};
-		document.getElementById("button-b-dialog-cancel").onclick = function(){
-			mcxDialog.showBottom({ cancelText: "关闭" });
-		};
-		
-		//toast
-		document.getElementById("button-toast").onclick = function(){
-			mcxDialog.toast("我是toast");
-		};
-		document.getElementById("button-toast-time").onclick = function(){
-			mcxDialog.toast("我是指定消失时间的toast", 2);  //2秒后消失
+		document.getElementById("button-b-dialog-cancel").onclick = function() {
+			mcxDialog.showBottom({ cancelText: "close" });
 		};
 		
-		//loading
+		// Toast
+		document.getElementById("button-toast").onclick = function() {
+			mcxDialog.toast("I'm toast");
+		};
+		document.getElementById("button-toast-time").onclick = function() {
+			mcxDialog.toast("Disappeared after 2 seconds", 2);  // Disappeared after 2 seconds
+		};
 		
-		//可设置参数
-		//src: "img",  //loading图所在路径 默认为img，表示该页面和img为同一级。注意该参数在npm环境中无效
-		//hint: "加载中..."  //指定提示内容
-		document.getElementById("button-loading").onclick = function(){
+		// Loading
+		
+		// Options
+		// The path in the loading diagram defaults to img,
+		// to indicate that the page is at the same level as img.
+		// Note that this parameter is not valid in the npm environment 
+		// src: "img",
+		// hint: "loading..."  // Specify prompt content
+		document.getElementById("button-loading").onclick = function() {
 			mcxDialog.loading({src: "dist/img"});
 		};
-		document.getElementById("button-loading-content").onclick = function(){
+		document.getElementById("button-loading-content").onclick = function() {
 			mcxDialog.loading({
 				src: "dist/img",
-				hint: "加载中..."  //指定提示内容
+				hint: "loading..."  // Specify prompt content
 			});
 		};
-		document.getElementById("button-loading-close").onclick = function(){
+		document.getElementById("button-loading-close").onclick = function() {
 			mcxDialog.loading({
 				src: "dist/img",
-				hint: "加载中..."  //指定提示内容
+				hint: "loading..."  // Specify prompt content
 			});
 			setTimeout(function(){
-				mcxDialog.closeLoading();  //关闭所有loading层
+				mcxDialog.closeLoading();  // Close all loading layers
 			}, 3000);
 		};
 	</script>

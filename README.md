@@ -38,13 +38,13 @@ Then you can get an object named `mcxDialog`.
 ```javascript
 <script type="text/javascript">
   // Alert
-  mcxDialog.alert("hi, 我是alert");
+  mcxDialog.alert("hi, I'm alert");
 
   // Confirm
-  mcxDialog.confirm("hi, 我是confirm");
+  mcxDialog.confirm("hi, I'm confirm");
 
   // Toast
-  mcxDialog.toast("hi，我是toast");
+  mcxDialog.toast("hi，I'm toast");
 
   // Loading
   mcxDialog.loading({src: "dist/img"});
