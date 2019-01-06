@@ -1,6 +1,6 @@
 /**
- * Mcx Dialog Mobile v0.1.1
- * Copyright (C) 2018 mcx
+ * Mcx Dialog Mobile v0.2.0
+ * Copyright (C) 2019 mcx
  * https://github.com/code-mcx/mcx-dialog-mobile
  */
 (function (global, factory) {
@@ -79,7 +79,7 @@
         }
       }
 
-      //set button click event
+      // set button click event
       options.btns.forEach(function (btn, i) {
         if (i != 0 && i <= options.btns.length - 1) {
           if (!options.bottom) {
@@ -99,7 +99,7 @@
       });
 
       if (!options.bottom) {
-        //set position
+        // set position
         dom.style.top = (document.documentElement.clientHeight - dom.offsetHeight) / 2 + "px";
         dom.style.left = (document.documentElement.clientWidth - dom.offsetWidth) / 2 + "px";
       }
@@ -113,25 +113,31 @@
   };
 
   var mcxDialog = {
-    alert: function alert(content) {
+    alert: function alert(content, options) {
+      var opts = {
+        titleText: "",
+        sureBtnText: "确定"
+      };
+      opts = extend(opts, options);
       var btn = document.createElement("div");
-      btn.innerText = "确定";
+      btn.innerText = opts.sureBtnText;
       addClass(btn, "dialog-button");
 
-      var opts = {};
       opts.btns = [btn];
 
       this.open(content, opts);
     },
     confirm: function confirm(content, options) {
       var opts = {
+        titleText: "",
+        cancelBtnText: "取消",
         sureBtnText: "确定",
         sureBtnClick: function sureBtnClick() {}
       };
       opts = extend(opts, options);
 
       var cancelBtn = document.createElement("div");
-      cancelBtn.innerText = "取消";
+      cancelBtn.innerText = opts.cancelBtnText;
       addClass(cancelBtn, "dialog-cancel-button");
 
       var sureBtn = document.createElement("div");
@@ -151,6 +157,13 @@
 
       dialogContent.innerText = content;
 
+      if (options.titleText) {
+        var dialogTitle = document.createElement("div");
+        addClass(dialogTitle, "dialog-title");
+        dialogTitle.innerText = options.titleText;
+        dialog.appendChild(dialogTitle);
+      }
+
       dialog.appendChild(dialogContent);
 
       options.btns.forEach(function (btn, i) {
@@ -162,6 +175,8 @@
     },
     showBottom: function showBottom(options) {
       var opts = {
+        title: "",
+        cancelText: "取消",
         btn: ["删除"],
         btnColor: [],
         btnClick: function btnClick(index) {}
@@ -173,14 +188,19 @@
       }
 
       var bottomDialog = document.createElement("div");
+      var title = document.createElement("div");
       var dialogItem = document.createElement("div");
       var cancelBtn = document.createElement("div");
-      cancelBtn.innerText = "取消";
+      title.innerText = opts.title;
+      cancelBtn.innerText = opts.cancelText;
       addClass(bottomDialog, "dialog-mobile-bottom");
       addClass(bottomDialog, "animation-bottom-in");
+      addClass(title, "bottom-btn-title");
       addClass(dialogItem, "bottom-btn-item");
       addClass(cancelBtn, "dialog-cancel-btn");
-
+      if (opts.title) {
+        bottomDialog.appendChild(title);
+      }
       bottomDialog.appendChild(dialogItem);
       bottomDialog.appendChild(cancelBtn);
 
