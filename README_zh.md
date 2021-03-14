@@ -1,8 +1,8 @@
 # mcx-dialog-mobile
 
 <p>
-  <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/language-javascript-green.svg" alt="mcx-dialog-mobile"></a>
-  <a href="https://github.com/code-mcx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/npm-v0.2.0-blue.svg" alt="mcx-dialog-mobile"></a>
+  <a href="https://github.com/dxx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/language-javascript-green.svg" alt="mcx-dialog-mobile"></a>
+  <a href="https://github.com/dxx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/npm-v0.2.0-blue.svg" alt="mcx-dialog-mobile"></a>
 </p>
 
 # Description
