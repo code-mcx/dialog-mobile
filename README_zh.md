@@ -49,7 +49,7 @@
   mcxDialog.showBottom();
 </script>
 ```
-更多使用请参见 [index_zh.html](./index_zh.html)
+更多使用请参见 [index_zh.html](https://github.com/dxx/mcx-dialog-mobile/blob/master/index_zh.html)
 
 ## Npm
 

@@ -5,7 +5,7 @@
   <a href="https://github.com/dxx/mcx-dialog-mobile"><img src="https://img.shields.io/badge/npm-v0.2.0-blue.svg" alt="mcx-dialog-mobile"></a>
 </p>
 <p>
-  <a href="./README_zh.md">中文文档</a>
+  <a href="https://github.com/dxx/mcx-dialog-mobile/blob/master/README_zh.md">中文文档</a>
 </p>
 
 # Description
@@ -53,7 +53,7 @@ Then you can get an object named `mcxDialog`.
   mcxDialog.showBottom();
 </script>
 ```
-More use see the [index.html](./index.html).
+More use see the [index.html](https://github.com/dxx/mcx-dialog-mobile/blob/master/index.html).
 
 ## Npm
 
